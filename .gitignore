@@ -1,4 +1,4 @@
 node_modules 
 .sass-cache
 data
-.sublime-workspace
+*.sublime-workspace

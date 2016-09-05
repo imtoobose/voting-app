@@ -19,9 +19,12 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "mongodb": "^2.2.9",
     "mongoose": "^4.6.0",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google": "^0.3.0",
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {

@@ -3,11 +3,16 @@ var
   Schema = mongoose.Schema;
 
  var userScheme = new Schema({
-  name: String,
-  username: String,
-  token: String,
-  created_at: Date,
-  polls: [String]
+  facebook:{
+    id: String,
+    token: String,
+    name: String
+  },
+  google:{
+    id: String,
+    token: String,
+    name: String
+  }
  });
 
 var User = mongoose.model('User', userScheme);
