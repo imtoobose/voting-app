@@ -1,0 +1,41 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "Voting app for FCC",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "voting",
+    "app",
+    "freecodecamp",
+    "express",
+    "node"
+  ],
+  "author": "Saumitra Bose",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.9",
+    "mongoose": "^4.6.0",
+    "passport": "^0.3.2",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-changed": "^1.3.2",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-sass": "^2.3.2",
+    "passport": "^0.3.2",
+    "pug": "^2.0.0-beta6"
+  }
+}
