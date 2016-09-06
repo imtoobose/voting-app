@@ -62,7 +62,7 @@ router.post('/polls',
               res.end();
             }
             else {
-              res.end(JSON.stringify({"error: Invalid query"}));
+              res.end(JSON.stringify({"error": "Invalid query"}));
             }
           break;
 
@@ -79,7 +79,7 @@ router.post('/polls',
               });
             }
             else{
-              res.end(JSON.stringify({"error: Invalid query"}));
+              res.end(JSON.stringify({"error": "Invalid query"}));;
             }
             break;
 
@@ -101,21 +101,21 @@ router.post('/polls',
               });
             }
             else{
-              res.end(JSON.stringify({"error: Invalid query"}));
+              res.end(JSON.stringify({"error": "Invalid query"}));;
             }
             break;
 
           //====INVALID QUERY==================================================
           default:
-            res.end(JSON.stringify({"error: Invalid query"}));
+            res.end(JSON.stringify({"error": "Invalid query"}));;
         }
       }
       else{
-        res.end(JSON.stringify({"error: Invalid query"}));
+        res.end(JSON.stringify({"error": "Invalid query"}));;
       }
     }
     else{
-      res.end(JSON.stringify({"error: Invalid query"}));
+      res.end(JSON.stringify({"error": "Invalid query"}));;
     }
   }
 );
