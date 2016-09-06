@@ -24,5 +24,11 @@ module.exports= function(passport){
       failureRedirect:'/'
     }));
 
+  router.get('/logout', 
+    function(req, res, next){
+      req.logout();
+      res.end();
+      res.redirect('/');
+    })
   return router;
 }
