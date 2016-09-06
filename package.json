@@ -24,7 +24,7 @@
     "mongoose": "^4.6.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
-    "passport-google": "^0.3.0",
+    "passport-google-oauth2": "^0.1.6",
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {

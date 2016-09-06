@@ -11,5 +11,18 @@ module.exports= function(passport){
       failureRedirect: '/'
     }));
 
+  router.get('/google',
+    passport.authenticate('google', { 
+      scope: ['https://www.googleapis.com/auth/plus.login'],
+      successRedirect:'/', 
+      failureRedirect:'/'
+    }));
+
+  router.get('/google/callback',
+    passport.authenticate('google', {
+      successRedirect:'/',
+      failureRedirect:'/'
+    }));
+
   return router;
 }
