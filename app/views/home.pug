@@ -5,9 +5,13 @@ html
     link(rel="stylesheet", type="text/css",href="css/style.css")
   nav
     ul
-      li
-        a(href="/login") Login 
-      li 
-        a(href="/auth/facebook") Authenticated page
+      if logged
+        li 
+          a(href="/auth/facebook") Facebook
+        li
+          a(href="/auth/google") Google
   body
     p #{message}
+    if !logged
+      div.userpolls 
+        a(href="/polls") My Polls
