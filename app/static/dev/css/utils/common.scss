@@ -21,5 +21,10 @@ $sans: 'Raleway', sans-serif;
 
 body, html{
   padding: 0;
+  margin: 0;
+}
+body{
+  font-family: $sans;
   background: $charcoal;
+  color: #FFF;
 }
