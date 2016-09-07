@@ -1,5 +1,9 @@
+//====AUTHORIZATION ROUTES==================================
+
 var router= require('express').Router();
 module.exports= function(passport){
+
+  //====FACEBOOK AUTHORIZATION===================================
   router.get('/facebook', 
     passport.authenticate('facebook', 
     {successRedirect:'/', failureRedirect: '/'})
@@ -7,10 +11,12 @@ module.exports= function(passport){
 
   router.get('/facebook/callback', 
     passport.authenticate('facebook', {
-      successRedirect: '/',
+      //successRedirect: '/',
+      successRedirect: 'localhost:3000',
       failureRedirect: '/'
     }));
 
+  //====GOOGLE AUTHORIZATION======================================
   router.get('/google',
     passport.authenticate('google', { 
       scope: ['https://www.googleapis.com/auth/plus.login'],
@@ -24,6 +30,7 @@ module.exports= function(passport){
       failureRedirect:'/'
     }));
 
+  //====LOGOUT USER==============================================
   router.get('/logout', 
     function(req, res, next){
       req.logout();

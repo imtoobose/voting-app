@@ -1,0 +1,25 @@
+@mixin nopad{
+  padding: 0;
+  margin : 0;
+}
+
+@mixin clearfix{
+  clear: both;
+  overflow: hidden;
+}
+
+$sandy: #EAD2AC;
+$darkred: #FE938C;
+$reallydarkred: #ED6A5A;
+$lightred: #E6B89C;
+$darkblue: #4281A4;
+$lightblue: #9CAFB7;
+$platinum: #E6EBE0;
+$charcoal: #1B1B1E;
+
+$sans: 'Raleway', sans-serif;
+
+body, html{
+  padding: 0;
+  background: $charcoal;
+}

@@ -1,0 +1,197 @@
+@import "common.scss";
+
+//====NAVBAR STYLES========================
+.nav{
+  @include nopad;
+  background: hsl(hue($charcoal), 2, 20);
+  border-bottom: 5px solid #F9564F;
+  color: white;
+  display: block;
+  font-family: $sans;
+  height: auto;
+  line-height: 4em;
+  position: relative;
+  transition: all 0.2s linear;
+  width: 100%;
+
+  &:before, &:after{
+    background: #FFF;
+    content:'';
+    height: 6px;
+    position: absolute;
+    top:106%;
+    width: 100%;
+  }
+
+  //====UL ELEMENT CONTAINING NAVBUTTONS========
+  & .navs{
+    @include nopad;
+    @include clearfix;
+    clear: both;
+    display: block;
+    height: 100%;
+    list-style-type: none;
+    overflow: hidden;
+    padding-left: 30px;
+    padding-right: 50px;
+
+    //====REGULAR NAVBUTTONS===============
+    & .navbut{
+      @include nopad;
+      border-top: 5px solid transparent;
+      color: white;
+      display: inline-block;
+      float: right;
+      font-size: 1em;
+      font-weight: 300;
+      height: 100%;
+      letter-spacing: 2px;
+      margin-left: 40px;
+      position: relative;
+      text-decoration: none;
+      transition: border-color 0.2s linear;
+
+      &:link, &:active{
+        color: white;
+      }
+
+      &:hover{
+        border-color: $platinum;
+      }
+
+      //====ICON INSIDE THE NAVBUTTONS============
+      & .icon{
+        & i {
+          font-size: 1.7em;
+          line-height: 2em;
+          margin: 0auto;
+          position: relative;
+        }
+      }
+    }
+
+    //====QUICKPOLL LOGO===========================
+    & .logo{
+      float: left;
+      font-size: 2em;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-left: 0;
+      &:hover{
+        border-color: transparent;
+        
+        & .letter{
+          animation: colorize 0.05s ease-in forwards;
+        }
+        & .letter{
+          color: #FFF !important;
+        }
+        @for $i from 0 through 4{
+          .letter-#{$i}{
+            animation-delay: $i*0.05s;
+          }
+        }
+      }
+    }
+
+    //=====GOOGLE AND FACEBOOK LOGOS===================
+    & .login{
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 0;
+      transition: color 0.2s ease-in;
+      &:hover{
+        border-color: transparent;
+        color: $reallydarkred;
+      }
+    }
+
+    //=====HAMBURGER==========================================
+    & .hamburger{
+      display: none;
+    }
+  }
+}
+
+//====OVERLAY FOR MOBILE NAVBAR================================
+.overlaynav{
+  height: 0;
+  margin-top: 2px;
+  transition: all 0.2s linear;
+//====BUTTONS INSIDE OVERLAY===================================
+  & .overlaybut{
+    display: block;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.4s linear;
+    width: 0;
+  }
+}
+
+//====VISIBLE OVERLAY========================================
+.visible{
+  height: 8em;
+  & .overlaybut{
+    height: 2em;
+    width: auto;
+  }
+}
+
+.visible.two{
+  height: 8em;
+}
+
+.visible.three{
+  height: 12em;
+}
+//====MOBILE VIEW===========================================
+@media (max-width: 680px){
+  .nav{
+    & .navs{
+      & .hamburger{
+        cursor: pointer;
+        display: block;
+      }
+      & a.navbut{
+        display: none;
+      }
+      & a.logo{
+        display: inline-block;
+      }
+    }
+  }
+
+  .overlaynav{
+    background: white;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+
+    & .overlaybut{
+      color: $reallydarkred;
+      font-size: 1.4em;
+      font-weight: 700;
+      padding-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      &:link, &:active{
+        color: $reallydarkred;
+      }
+    }
+
+    & .even{
+      color: #FFF;
+      background: $reallydarkred;
+    }
+  }
+}
+
+@keyframes colorize{
+  0%{
+    color: #FFF;
+  }
+  100%{
+    color: $reallydarkred;
+  }
+}

@@ -2,7 +2,11 @@ doctype html
 html
   head 
     title Polls
+    link(rel="stylesheet" href="css/polls.css")
+    link(href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet")
+    link(href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css", rel="stylesheet")
   body
+    include navbar.pug
     input.options(type="text", name="header" required)
     input.options(type="text", name="option" required)
     input.options(type="text", name="option" required)

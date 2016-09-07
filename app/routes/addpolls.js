@@ -30,7 +30,7 @@ router.get('/polls',
     if(res.locals.result && res.locals.result.length>0){
       console.log(res.locals.result);
     }
-    res.render('polls');
+    res.render('polls', {logged: (req.user? false: true)});
   }
 );
 

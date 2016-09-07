@@ -1,0 +1,38 @@
+//====NAVBAR START===========================================
+nav.nav
+  //====DESKTOP NAVS=========================================
+  ul.navs
+    //====QUICKPOLL LOGO=====================================
+    a.navbut.logo(href="/") 
+      -var words = 'QUICK'.split('');
+      -var i = 0;
+      each word in words
+        span(class="letter-"+i + " letter") #{word}
+        -i += 1;
+      span /POLL
+    //====HAMBURGER================================================
+    li.navbut.hamburger(id="hamburger-menu") HAM
+    if logged
+      a.navbut.login.facebook(href="/auth/facebook") 
+        li.icon
+          i.ion-social-facebook
+      a.navbut.login.google(href="/auth/google")
+        li.icon
+          i.ion-social-googleplus
+    else
+      a.navbut.logout(href="/auth/logout")
+        li Logout
+      a.navbut.mypolls(href="/polls")
+        li My Polls
+//====MOBILE OVERLAY===================================================
+div.overlaynav(id="overlay-nav" class= (logged? "two":"three"))
+  if logged
+    a.overlaybut.facebook.odd(href="/auth/facebook") LOGIN WITH FACEBOOK
+    a.overlaybut.google.even(href="/auth/google") LOGIN WITH GOOGLE
+  else
+    a.overlaybut.mypolls.odd(href="/polls") MY POLLS
+    a.overlaybut.logout.even(href="/auth/logout") LOGOUT
+//=====OVERLAY END======================================================
+//=====NAVS END=========================================================
+script.
+  var v=false,e=function(v){return document.getElementById(v)},$o=e('overlay-nav'),$h=e('hamburger-menu');$h.addEventListener('click',function(){if(v){$o.classList.remove('visible');v=false;}else{$o.classList.add('visible');v=true;}});
