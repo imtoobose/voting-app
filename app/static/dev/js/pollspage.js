@@ -1,5 +1,6 @@
 document.getElementById('submit-button').addEventListener('click', function(e){
   var options = document.getElementsByClassName('options');
+  var type = document.getElementById('charttype').value;
   var answers = [];
   for(var i=0; i<options.length; i++){
     if(!options[i].value){
@@ -19,7 +20,8 @@ document.getElementById('submit-button').addEventListener('click', function(e){
   qwest.post('/polls', {
     action: "add",
     name: answers[0].optionName,
-    options: answers.slice(1)
+    options: answers.slice(1),
+    chartType: type
   })
   .then(function(xhr, response){
     window.location = '/';

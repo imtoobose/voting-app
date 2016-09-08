@@ -2,14 +2,14 @@ doctype html
 html
   head 
     title QuickPoll: Fast and Easy Polls
-    link(rel="stylesheet", type="text/css",href="css/style.css")
+    link(rel="stylesheet", type="text/css",href="css/home.css")
     link(href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet")
-    link(href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css", rel="stylesheet")
+    //link(href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css", rel="stylesheet")
   body
-    
     include navbar.pug
         
     div
-      p #{message}
-
+      div.allcharts(id="allcharts")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
+    script(src="js/homepage.js")

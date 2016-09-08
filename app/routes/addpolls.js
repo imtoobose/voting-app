@@ -5,15 +5,16 @@ var polls  = require('../mongo/polls');
 
 //====GET POLLS BELONGING TO USER==============================
 function getpolldata(userid, req, res, next){
-  var result = [];
-  polls.find({creator: userid}, function(err, pollarr){
-    for(var i=0; i<pollarr.length; i++){
-      result.push(pollarr[i]._id);
-    }
-    res.locals.result=  result;
+  var searchfor = {};
+  if(userid) searchfor.creator = userid;
+
+  polls.find(searchfor, function(err, pollarr){
+    if(err) throw err;
+    res.locals.result = pollarr;
     next();
   });
 }
+
 
 //====SHOW THE POLLS OF A USER===============================
 router.get('/polls', 
@@ -34,6 +35,15 @@ router.get('/polls',
   }
 );
 
+//====GET ALL POLLS===========================================
+router.get('/polls/all',
+  function(req, res, next){
+    getpolldata(null, req, res, next);
+  }, 
+  function(req, res, next){
+    res.jsonp({polls: res.locals.result});
+  });
+
 //=====POST REQUESTS====================================================
 router.post('/polls', 
   function(req, res, next){
@@ -46,6 +56,8 @@ router.post('/polls',
             newPoll.name    = req.body.name;
             newPoll.options = req.body.options;
             newPoll.creator = req.user.id;
+            newPoll.chartType = req.body.chartType;
+            console.log(req.user);
             newPoll.save(function(err){
               //redirect to 500 page
               if(err) throw err;

@@ -8,6 +8,7 @@ var PollSchema = new Schema({
     optionName: String,
     votes: Number
   }],
+  chartType: String,
   creator: String
 });
 

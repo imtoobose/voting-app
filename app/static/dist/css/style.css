@@ -54,17 +54,13 @@ body {
       margin-left: 40px;
       position: relative;
       text-decoration: none;
-      -webkit-transition: border-color 0.2s linear;
-      transition: border-color 0.2s linear; }
+      -webkit-transition: all 0.2s linear;
+      transition: all 0.2s linear; }
       .nav .navs .navbut:link, .nav .navs .navbut:active {
         color: white; }
       .nav .navs .navbut:hover {
-        border-color: #E6EBE0; }
-      .nav .navs .navbut .icon i {
-        font-size: 1.7em;
-        line-height: 2em;
-        margin: 0auto;
-        position: relative; }
+        border-color: #ED6A5A;
+        color: #ED6A5A; }
     .nav .navs .logo {
       float: left;
       font-size: 2em;
@@ -72,7 +68,8 @@ body {
       letter-spacing: 4px;
       margin-left: 0; }
       .nav .navs .logo:hover {
-        border-color: transparent; }
+        border-color: transparent;
+        color: #FFF; }
         .nav .navs .logo:hover .letter {
           -webkit-animation: colorize 0.05s ease-in forwards;
                   animation: colorize 0.05s ease-in forwards; }
@@ -93,17 +90,59 @@ body {
         .nav .navs .logo:hover .letter-4 {
           -webkit-animation-delay: 0.2s;
                   animation-delay: 0.2s; }
-    .nav .navs .login {
-      padding-left: 20px;
-      padding-right: 20px;
-      margin: 0;
-      -webkit-transition: color 0.2s ease-in;
-      transition: color 0.2s ease-in; }
-      .nav .navs .login:hover {
-        border-color: transparent;
-        color: #ED6A5A; }
     .nav .navs .hamburger {
-      display: none; }
+      padding: 0;
+      margin: 0;
+      display: none;
+      height: 1.5em;
+      margin-bottom: 1em;
+      margin-top: 1em;
+      position: relative;
+      width: 2em; }
+      .nav .navs .hamburger:hover {
+        border-color: transparent !important; }
+      .nav .navs .hamburger:before, .nav .navs .hamburger:after, .nav .navs .hamburger .bar {
+        background: #FFF;
+        content: '';
+        display: block;
+        height: 4px;
+        left: 50%;
+        position: absolute;
+        -webkit-transform: translate3d(-50%, 0%, 0);
+                transform: translate3d(-50%, 0%, 0);
+        width: 30px;
+        z-index: 10;
+        -webkit-transition: top 0.3s ease, -webkit-transform 0.3s 0.3s ease;
+        transition: top 0.3s ease, -webkit-transform 0.3s 0.3s ease;
+        transition: top 0.3s ease, transform 0.3s 0.3s ease;
+        transition: top 0.3s ease, transform 0.3s 0.3s ease, -webkit-transform 0.3s 0.3s ease; }
+      .nav .navs .hamburger:before {
+        top: 0; }
+      .nav .navs .hamburger .bar {
+        opacity: 1;
+        top: 50%;
+        -webkit-transition: opacity 0.3s 0.3s ease;
+        transition: opacity 0.3s 0.3s ease; }
+      .nav .navs .hamburger:after {
+        top: 100%; }
+    .nav .navs .animateburger:after, .nav .navs .animateburger:before {
+      -webkit-transition: top 0.3s 0.3s ease, -webkit-transform 0.3s ease;
+      transition: top 0.3s 0.3s ease, -webkit-transform 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s 0.3s ease, -webkit-transform 0.3s ease; }
+    .nav .navs .animateburger:after {
+      top: 50%;
+      -webkit-transform: translate3d(-50%, 0%, 0) rotate(45deg);
+              transform: translate3d(-50%, 0%, 0) rotate(45deg); }
+    .nav .navs .animateburger:before {
+      top: 50%;
+      -webkit-transform: translate3d(-50%, 0%, 0) rotate(-45deg);
+              transform: translate3d(-50%, 0%, 0) rotate(-45deg); }
+    .nav .navs .animateburger .bar {
+      visibility: none;
+      opacity: 0;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease; }
 
 .overlaynav {
   height: 0;
@@ -130,7 +169,7 @@ body {
 .visible.three {
   height: 12em; }
 
-@media (max-width: 680px) {
+@media (max-width: 924px) {
   .nav .navs .hamburger {
     cursor: pointer;
     display: block; }
@@ -154,8 +193,23 @@ body {
       .overlaynav .overlaybut:link, .overlaynav .overlaybut:active {
         color: #ED6A5A; }
     .overlaynav .even {
-      color: #FFF;
-      background: #ED6A5A; } }
+      background: #ED6A5A;
+      color: #FFF; } }
+
+@media (max-width: 420px) {
+  .nav .navs {
+    margin: 0;
+    padding: 0;
+    width: 100%; }
+    .nav .navs .logo {
+      font-size: 1em;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 100%; }
+    .nav .navs .hamburger {
+      text-align: center;
+      width: 100%; } }
 
 @-webkit-keyframes colorize {
   0% {

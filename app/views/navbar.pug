@@ -11,14 +11,11 @@ nav.nav
         -i += 1;
       span /POLL
     //====HAMBURGER================================================
-    li.navbut.hamburger(id="hamburger-menu") HAM
+    li.navbut.hamburger(id="hamburger-menu")
+      div.bar
     if logged
-      a.navbut.login.facebook(href="/auth/facebook") 
-        li.icon
-          i.ion-social-facebook
-      a.navbut.login.google(href="/auth/google")
-        li.icon
-          i.ion-social-googleplus
+      a.navbut.login.facebook(href="/auth/facebook") Facebook
+      a.navbut.login.google(href="/auth/google") Google
     else
       a.navbut.logout(href="/auth/logout")
         li Logout
@@ -35,4 +32,4 @@ div.overlaynav(id="overlay-nav" class= (logged? "two":"three"))
 //=====OVERLAY END======================================================
 //=====NAVS END=========================================================
 script.
-  var v=false,e=function(v){return document.getElementById(v)},$o=e('overlay-nav'),$h=e('hamburger-menu');$h.addEventListener('click',function(){if(v){$o.classList.remove('visible');v=false;}else{$o.classList.add('visible');v=true;}});
+  var v=false,e=function(v){return document.getElementById(v)},$o=e('overlay-nav'),$h=e('hamburger-menu');$h.addEventListener('click',function(){if(v){$o.classList.remove('visible');v=false;this.classList.remove('animateburger');}else{$o.classList.add('visible');v=true; this.classList.add('animateburger');}});

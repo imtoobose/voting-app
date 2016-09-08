@@ -1,0 +1,14 @@
+@import "utils/navbar.scss";
+
+.charts{
+  width: 49%; 
+  display: inline-block;
+  padding: 0.5%;
+}
+canvas{
+  float: left;
+}
+.allcharts {
+  display:block; 
+  margin-top:20px;
+}

@@ -13,7 +13,7 @@ gulp.task('sass', function(){
   .pipe(changed('app/static/dist'))
   .pipe(sass()).on('error', sass.logError)
   .pipe(autoprefixer())
-  .on('end', ()=>console.log('Sass files compiled'))
+  .on('end', ()=>console.log('\033[92mSass\033[0m files compiled'))
   .pipe(gulp.dest('app/static/dist/css'))
   .pipe(browserSync.stream());
 });
@@ -24,10 +24,10 @@ gulp.task('staticjs', function(){
   .pipe(babel({
     presets: ['es2015']
     }))
-  .on('end', ()=> console.log('Babel transpiled'))
+  .on('end', ()=> console.log('\033[92mBabel\033[0m transpiled'))
   .on('error', (e)=> console.log(e))
   .pipe(gulp.dest('app/static/dist'))
-  .on('end', ()=> console.log('Compiled and saved static js'))
+  .on('end', ()=> console.log('\033[92mCompiled and saved static js\033[0m'))
   .pipe(browserSync.stream());
 });
 

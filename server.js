@@ -1,33 +1,29 @@
 //====DEPENDENCIES =========================================
 var 
+  path       = require('path'),
   express    = require('express'),
   app        = express(),
   bodyParser = require('body-parser'),
   session    = require('express-session'),
   passport   = require('passport'),
+  favicon    = require('serve-favicon'),
   mongoose   = require('mongoose');
 
 //====ROUTES=================================================
 var 
-  home      = require('./app/routes/home'),
-  auth      = require('./app/routes/auth'),
-  userpolls = require('./app/routes/addpolls');
-  //user = require('./app/mongo/user');
+  home      = require(__dirname +'/app/routes/home'),
+  auth      = require(__dirname + '/app/routes/auth'),
+  userpolls = require(__dirname +'/app/routes/addpolls');
 
-//====MONGOOOSE AND MONGOD===================================  
+//====SERVE FAVICOM================================================
+app.use(favicon(path.join(__dirname, "app", "static", "dist", "assets", "favicon.ico")));
+//====MONGOOOSE AND MONGOD==========================================  
 var url = process.env.MONGOLAB_URI ||
           process.env.MONGOHQ_URL  ||
           'mongodb://localhost/votingapp';
 mongoose.connect(url);
-
-//For cleaning mongodb
-// user.find({}, function(err, use){
-//   for(var i=0; i<use.length; i++)
-//     use[i].remove();
-// });
-
 //====CONFIGURATION OF EXPRESS AND PASSPORT======================
-app.use(express.static('./app/static/dist'));
+app.use(express.static(path.join(__dirname,'app', 'static', 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
@@ -40,9 +36,9 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.set('views', './app/views');
+app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'pug');
-require('./app/config/strategies')(passport);
+require(path.join(__dirname, 'app', 'config', 'strategies'))(passport);
 
 //====ROUTING=====================================================
 app.use('/', home, userpolls);

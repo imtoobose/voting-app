@@ -49,24 +49,15 @@
       margin-left: 40px;
       position: relative;
       text-decoration: none;
-      transition: border-color 0.2s linear;
+      transition: all 0.2s linear;
 
       &:link, &:active{
         color: white;
       }
 
       &:hover{
-        border-color: $platinum;
-      }
-
-      //====ICON INSIDE THE NAVBUTTONS============
-      & .icon{
-        & i {
-          font-size: 1.7em;
-          line-height: 2em;
-          margin: 0auto;
-          position: relative;
-        }
+        border-color: $reallydarkred;
+        color: $reallydarkred;
       }
     }
 
@@ -79,7 +70,7 @@
       margin-left: 0;
       &:hover{
         border-color: transparent;
-        
+        color: #FFF;
         & .letter{
           animation: colorize 0.05s ease-in forwards;
         }
@@ -94,21 +85,66 @@
       }
     }
 
-    //=====GOOGLE AND FACEBOOK LOGOS===================
-    & .login{
-      padding-left: 20px;
-      padding-right: 20px;
-      margin: 0;
-      transition: color 0.2s ease-in;
+    //=====HAMBURGER==========================================
+    & .hamburger{
+      @include nopad;
+      display: none;
+      height: 1.5em;
+      margin-bottom: 1em;
+      margin-top: 1em;
+      position: relative;
+      width: 2em;
+
       &:hover{
-        border-color: transparent;
-        color: $reallydarkred;
+        border-color: transparent !important;
+      }
+
+      &:before, &:after, & .bar{
+        //top:50%;
+        background: #FFF;
+        content: '';
+        display: block;
+        height: 4px;
+        left: 50%;
+        position: absolute;
+        transform: translate3d(-50%, 0%, 0);
+        width: 30px;
+        z-index: 10;
+        transition: top 0.3s ease, transform 0.3s 0.3s ease;
+      }
+
+      &:before{
+        top: 0;
+      }
+
+      & .bar{
+        opacity: 1;
+        top: 50%;
+        transition: opacity 0.3s 0.3s ease;
+      }
+
+      &:after{
+        top: 100%;
       }
     }
 
-    //=====HAMBURGER==========================================
-    & .hamburger{
-      display: none;
+    & .animateburger{
+      &:after, &:before{
+        transition: transform 0.3s ease, top 0.3s 0.3s ease;
+      }
+      &:after{
+        top:50%;
+        transform: translate3d(-50%, 0%, 0) rotate(45deg);
+      }
+      &:before{
+        top:50%;
+        transform: translate3d(-50%, 0%, 0) rotate(-45deg);
+      }
+      & .bar{
+        visibility: none;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
     }
   }
 }
@@ -145,7 +181,7 @@
   height: 12em;
 }
 //====MOBILE VIEW===========================================
-@media (max-width: 680px){
+@media (max-width: 924px){
   .nav{
     & .navs{
       & .hamburger{
@@ -181,8 +217,29 @@
     }
 
     & .even{
-      color: #FFF;
       background: $reallydarkred;
+      color: #FFF;
+    }
+  }
+}
+
+@media (max-width: 420px){
+  .nav{
+    & .navs{
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      & .logo{
+        font-size: 1em;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+      }
+      & .hamburger{
+        text-align: center;
+        width: 100%;
+      }
     }
   }
 }
