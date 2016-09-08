@@ -196,7 +196,7 @@ body {
       background: #ED6A5A;
       color: #FFF; } }
 
-@media (max-width: 420px) {
+@media (max-width: 565px) {
   .nav .navs {
     margin: 0;
     padding: 0;
@@ -223,14 +223,34 @@ body {
   100% {
     color: #ED6A5A; } }
 
-.charts {
-  width: 49%;
-  display: inline-block;
-  padding: 0.5%; }
+.home canvas {
+  float: left;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  padding-bottom: 15px;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear; }
+  .home canvas:hover {
+    -webkit-transform: scale(1.03);
+            transform: scale(1.03); }
 
-canvas {
-  float: left; }
-
-.allcharts {
+.home .allcharts {
   display: block;
   margin-top: 20px; }
+  .home .allcharts .charts {
+    display: inline-block;
+    padding: 0.5%;
+    width: 32%; }
+
+@media (max-width: 924px) {
+  .home .allcharts .charts {
+    width: 49%; } }
+
+@media (max-width: 565px) {
+  .home .allcharts .charts {
+    margin-bottom: 3em;
+    width: 99%; }
+    .home .allcharts .charts canvas:hover {
+      -webkit-transform: none;
+              transform: none; } }

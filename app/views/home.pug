@@ -8,8 +8,16 @@ html
   body
     include navbar.pug
         
-    div
+    div.home
       div.allcharts(id="allcharts")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
-    script(src="js/homepage.js")
+    script(src="js/createCharts.js")
+    script.
+      qwest.get('/polls/all')
+      .then((xhr, response)=>{
+        createCharts(response.polls, document.getElementById('allcharts'), false);
+      })
+      .catch((e)=> {
+        console.log(e);
+      });

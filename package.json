@@ -42,6 +42,7 @@
     "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^2.3.2",
     "passport": "^0.3.2",
+    "passport-github2": "^0.1.10",
     "pug": "^2.0.0-beta6"
   }
 }

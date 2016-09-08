@@ -222,3 +222,32 @@ body {
     color: #FFF; }
   100% {
     color: #ED6A5A; } }
+
+.single {
+  display: block; }
+  .single .allcharts {
+    display: block;
+    margin-top: 20px;
+    text-align: center; }
+    .single .allcharts .charts {
+      position: relative;
+      display: inline-block;
+      width: 50%; }
+      .single .allcharts .charts canvas {
+        float: left;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        padding-bottom: 15px;
+        -webkit-transition: -webkit-transform 0.2s linear;
+        transition: -webkit-transform 0.2s linear;
+        transition: transform 0.2s linear;
+        transition: transform 0.2s linear, -webkit-transform 0.2s linear; }
+        .single .allcharts .charts canvas:hover {
+          -webkit-transform: scale(1.03);
+                  transform: scale(1.03); }
+
+@media (max-width: 924px) {
+  .single .allcharts .charts {
+    width: 99%; }
+    .single .allcharts .charts canvas:hover {
+      -webkit-transform: none;
+              transform: none; } }

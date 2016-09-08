@@ -15,6 +15,14 @@ function getpolldata(userid, req, res, next){
   });
 }
 
+//====GET POLL BY ID=========================================
+function getpollbyid(id, req, res, next){
+  polls.find({_id: id}, function(err, poll){
+    if(err) throw err;
+    res.locals.poll = poll;
+    next();
+  })
+}
 
 //====SHOW THE POLLS OF A USER===============================
 router.get('/polls', 
@@ -43,6 +51,21 @@ router.get('/polls/all',
   function(req, res, next){
     res.jsonp({polls: res.locals.result});
   });
+
+//====GET ONE POLL=============================================
+router.get('/polls/getone/:pollid',
+  function(req, res, next){
+    if(req.params.pollid){
+      getpollbyid(req.params.pollid, req, res, next);
+    }
+    else { 
+      res.end();
+    }
+  },
+  function(req, res, next){
+    res.jsonp({poll: res.locals.poll});
+  }
+);
 
 //=====POST REQUESTS====================================================
 router.post('/polls', 
