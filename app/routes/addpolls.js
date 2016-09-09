@@ -36,10 +36,11 @@ router.get('/polls',
     }
   }, 
   function(req, res, next){
-    if(res.locals.result && res.locals.result.length>0){
-      console.log(res.locals.result);
-    }
-    res.render('polls', {logged: (req.user? false: true)});
+    res.jsonp({polls:res.locals.result});
+  //   if(res.locals.result && res.locals.result.length>0){
+  //     console.log(res.locals.result);
+  //   }
+  //   res.render('polls', {logged: (req.user? false: true)});
   }
 );
 

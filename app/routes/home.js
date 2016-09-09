@@ -14,4 +14,15 @@ router.get('/single',
     res.render('single', {logged:!loggedin, pollid: req.query.pollid});
 });
 
+router.get('/user', 
+  function(req, res, next){
+    var loggedin = req.user? true: false;
+    if(loggedin){
+      res.render('user');
+      res.end();
+    }
+    else{
+      res.end('Unauthorized access');
+    }
+  })
 module.exports= router;

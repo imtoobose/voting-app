@@ -182,7 +182,8 @@ body {
     left: 0;
     position: absolute;
     width: 100%;
-    z-index: 100; }
+    z-index: 100;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7); }
     .overlaynav .overlaybut {
       color: #ED6A5A;
       font-size: 1.4em;
@@ -202,7 +203,6 @@ body {
     padding: 0;
     width: 100%; }
     .nav .navs .logo {
-      font-size: 1em;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -227,27 +227,61 @@ body {
   display: block; }
   .single .allcharts {
     display: block;
-    margin-top: 20px;
-    text-align: center; }
+    margin-top: 20px; }
     .single .allcharts .charts {
-      position: relative;
       display: inline-block;
+      float: right;
+      position: relative;
       width: 50%; }
       .single .allcharts .charts canvas {
-        float: left;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         padding-bottom: 15px;
-        -webkit-transition: -webkit-transform 0.2s linear;
-        transition: -webkit-transform 0.2s linear;
-        transition: transform 0.2s linear;
-        transition: transform 0.2s linear, -webkit-transform 0.2s linear; }
-        .single .allcharts .charts canvas:hover {
-          -webkit-transform: scale(1.03);
-                  transform: scale(1.03); }
+        padding-top: 15px; }
+
+.options {
+  display: block;
+  float: right;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  width: 50%; }
+  .options ul {
+    padding: 0;
+    margin: 0;
+    padding-left: 20px; }
+    .options ul li {
+      display: block;
+      float: left;
+      margin: 10px 0px 10px 0px;
+      position: relative;
+      width: 100%; }
+      .options ul li .votelabel {
+        cursor: pointer;
+        display: inline-block;
+        float: left;
+        margin-left: 50px;
+        margin-top: 10px;
+        position: relative;
+        width: 80%; }
+      .options ul li .vote {
+        cursor: pointer;
+        display: block;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translate3d(0, -50%, 0);
+                transform: translate3d(0, -50%, 0);
+        width: 30px; }
 
 @media (max-width: 924px) {
   .single .allcharts .charts {
     width: 99%; }
     .single .allcharts .charts canvas:hover {
       -webkit-transform: none;
-              transform: none; } }
+              transform: none; }
+  .options {
+    position: relative;
+    width: 100%; }
+    .options ul {
+      padding: 0;
+      margin: 0; }
+      .options ul li .votelabel {
+        width: calc(100% - 80px); } }

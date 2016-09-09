@@ -9,8 +9,43 @@ html
         
     div.single
       div.allcharts(id=pollid)
+        form.options(id="votes")
+          ul.optionlist(id="optionlist")
+          
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
     script(src="js/createCharts.js")
     script.
-      var a=document.getElementsByClassName('allcharts')[0],i=a.getAttribute('id');qwest.get('/polls/getone/'+i).then((x, r)=>{createCharts(r.poll, a, true);}).catch((e)=>{console.log(e);});
+      function createVotes(arr){
+        for(var i=0; i<arr.length; i++){
+          var 
+            id = "vote-"+i,
+            _in = document.createElement('input'),
+            label = document.createElement('label'),
+            li= document.createElement('li');
+
+          _in.classList.add('vote'),
+          _in.setAttribute('type', 'radio'),
+          _in.setAttribute('name', 'vote'),
+          _in.setAttribute('id', id),
+          label.setAttribute('for', id),
+          label.classList.add('votelabel'),
+          label.innerHTML = arr[i].optionName;
+
+          li.appendChild(_in),
+          li.appendChild(label);
+
+          document.getElementById('optionlist').appendChild(li);
+        }
+      }
+
+      var a=document.getElementsByClassName('allcharts')[0],
+      i=a.getAttribute('id');
+      qwest.get('/polls/getone/'+i)
+        .then((x, r)=>{
+        console.log(x, r);
+        createCharts(r.poll, a, true);
+        console.log(r.poll.options);
+        createVotes(r.poll[0].options);
+        })
+        .catch((e)=>{console.log(e);});

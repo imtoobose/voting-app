@@ -46,8 +46,7 @@ function createCharts (res, allcharts, detailed){
           $lightblue: '#9CAFB7',
           $charcoal: '#1B1B1E'
       }
-      console.log(detailed, type);
-      //var gridDisplay = 
+      
       return {
           type: type,
           data: {
