@@ -28,7 +28,7 @@ PollSchema.methods.addOption = function(option, res){
     }
     this.options.push({
       optionName: option,
-      votes: 0
+      votes: 1
     });
   }
 }

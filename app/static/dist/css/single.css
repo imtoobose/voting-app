@@ -241,48 +241,97 @@ body {
 .options {
   display: block;
   float: left;
+  overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 50px;
   width: 50%; }
-  .options ul {
-    padding: 0;
-    margin: 0;
-    padding-left: 20px; }
-    .options ul li {
-      display: block;
-      float: left;
-      margin: 10px 0px 10px 0px;
-      position: relative;
-      width: 100%; }
-      .options ul li .votelabel {
-        cursor: pointer;
-        display: inline-block;
-        float: left;
-        margin-left: 50px;
-        margin-top: 10px;
-        position: relative;
-        width: 80%; }
-      .options ul li .vote {
-        cursor: pointer;
-        display: block;
-        height: 30px;
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translate3d(0, -50%, 0);
-                transform: translate3d(0, -50%, 0);
-        width: 30px; }
+
+.optionlist {
+  padding: 0;
+  margin: 0;
+  padding-left: 20px; }
+
+.optionlistval {
+  display: block;
+  float: left;
+  margin: 10px 0px 10px 0px;
+  position: relative;
+  width: 100%; }
+
+.addoptioncontain {
+  height: 2em;
+  overflow-y: hidden; }
+  .addoptioncontain .addoption {
+    margin: 10px 0 0 0;
+    display: block; }
+
+.addoptionval {
+  padding-left: 15px; }
+  .addoptionval input.radio, .addoptionval input[type="radio"] {
+    height: 0;
+    width: 0;
+    visibility: none; }
+    .addoptionval input.radio + label .addoptioncontain, .addoptionval input[type="radio"] + label .addoptioncontain {
+      height: 0;
+      -webkit-transition: height 0s 0.2s linear;
+      transition: height 0s 0.2s linear; }
+    .addoptionval input.radio + label .addoption, .addoptionval input[type="radio"] + label .addoption {
+      border: none;
+      height: 1em;
+      -webkit-transform: translate3d(0%, -200%, 0);
+              transform: translate3d(0%, -200%, 0);
+      -webkit-transition: -webkit-transform 0.2s ease-out;
+      transition: -webkit-transform 0.2s ease-out;
+      transition: transform 0.2s ease-out;
+      transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out; }
+    .addoptionval input.radio:checked + label .addoptioncontain, .addoptionval input[type="radio"]:checked + label .addoptioncontain {
+      -webkit-transition: height 0.2s 0s linear;
+      transition: height 0.2s 0s linear;
+      height: 2em; }
+    .addoptionval input.radio:checked + label .addoption, .addoptionval input[type="radio"]:checked + label .addoption {
+      -webkit-transform: translate3d(0%, 0%, 0);
+              transform: translate3d(0%, 0%, 0); }
+
+.votelabel {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin-left: 50px;
+  margin-top: 10px;
+  position: relative;
+  width: 80%; }
+
+.vote {
+  cursor: pointer;
+  display: block;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0);
+  width: 30px; }
+
+.submit {
+  margin-top: 20px;
+  margin-left: 60px; }
 
 @media (max-width: 924px) {
-  .single .allcharts .charts {
-    width: 99%; }
-    .single .allcharts .charts canvas:hover {
-      -webkit-transform: none;
-              transform: none; }
+  .single .allcharts {
+    text-align: center; }
+    .single .allcharts .charts {
+      width: 99%; }
+      .single .allcharts .charts canvas:hover {
+        -webkit-transform: none;
+                transform: none; }
   .options {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    float: none;
     position: relative;
-    width: 100%; }
+    text-align: left; }
     .options ul {
       padding: 0;
       margin: 0; }
-      .options ul li .votelabel {
-        width: calc(100% - 80px); } }
+    .options .optionlist, .options .optionlistval, .options .submit {
+      padding-left: 0; } }

@@ -24,48 +24,103 @@
 .options{
   display: block;
   float: left;
+  overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 50px;
   width: 50%;
+}
 
-  ul{
-    @include nopad;
-    padding-left: 20px;
 
-    li{
-      display: block;
-      float: left;
-      margin: 10px 0px 10px 0px;
-      position: relative;
-      width: 100%;
-      
-      & .votelabel{
-        cursor: pointer;
-        display: inline-block;
-        float: left;
-        margin-left: 50px;
-        margin-top: 10px;
-        position: relative;
-        width: 80%;
+.optionlist{
+  @include nopad;
+  padding-left: 20px;
+}
+
+.optionlistval{
+  display: block;
+  float: left;
+  margin: 10px 0px 10px 0px;
+  position: relative;
+  width: 100%;
+}
+
+
+.addoptioncontain{
+  height: 2em;
+  overflow-y : hidden;
+  & .addoption{
+    margin: 10px 0 0 0;
+    display: block;
+  }
+}
+
+.addoptionval{
+  padding-left: 15px;
+  
+  & input.radio, & input[type="radio"]{
+    height: 0;
+    width: 0;
+    visibility: none;
+
+    & + label{
+
+      & .addoptioncontain{
+        height: 0;
+        transition: height 0s 0.2s linear;
       }
 
-      & .vote{
-        cursor: pointer;
-        display: block;
-        height: 30px;
-        position: absolute;
-        top: 50%;
-        transform: translate3d(0, -50%, 0);
-        width: 30px;
+      & .addoption{
+        border: none;
+        height: 1em;
+        transform: translate3d(0%, -200%, 0);
+        transition: transform 0.2s ease-out;
+      }
+    }
+
+    &:checked + label{
+
+      & .addoptioncontain{
+        transition: height 0.2s 0s linear;
+        height:2em;
+      }
+
+      & .addoption {
+        transform: translate3d(0%, 0%, 0);
       }
     }
   }
+}
+
+.votelabel{
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin-left: 50px;
+  margin-top: 10px;
+  position: relative;
+  width: 80%;
+}
+
+.vote{
+  cursor: pointer;
+  display: block;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: 30px;
+}
+
+.submit{
+  margin-top: 20px;
+  margin-left: 60px;
 }
 
 @media(max-width: 924px){
   .single{
 
     & .allcharts{
+      text-align: center;
 
       & .charts{
         width: 99%;
@@ -78,18 +133,18 @@
   }
 
   .options{
+    @include nopad;
+    display: inline-block;
+    float: none;
     position: relative;
-    width: 100%;
+    text-align: left;
 
     ul{
       @include nopad;
+    }
 
-      li {
-
-        & .votelabel{
-          width: calc(100% - 80px);
-        }
-      }
+    .optionlist, .optionlistval, .submit{
+      padding-left: 0;
     }
   }
 }

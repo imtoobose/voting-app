@@ -30,7 +30,7 @@ function createCharts(res, allcharts, detailed) {
         return result;
     }
 
-    Chart.defaults.global.defaultFontFamily = "Raleway";
+    Chart.defaults.global.defaultFontFamily = "'Raleway', 'sans-serif'";
     Chart.defaults.global.defaultFontColor = "#FFF";
     Chart.defaults.global.defaultFontStyle = "normal";
     Chart.defaults.global.defaultFontSize = 12;

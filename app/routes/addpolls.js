@@ -1,9 +1,11 @@
-//====HANDLE POLLS ROUTE====================================
+//====HANDLE POLLS ROUTE========================================================
 
 var router = require('express').Router();
 var polls  = require('../mongo/polls');
 
-//====GET POLLS BELONGING TO USER==============================
+//====UTILITY FUNCTIONS========================================================
+
+//====GET POLLS BELONGING TO USER===============================================
 function getpolldata(userid, req, res, next){
   var searchfor = {};
   if(userid) searchfor.creator = userid;
@@ -16,7 +18,7 @@ function getpolldata(userid, req, res, next){
   });
 }
 
-//====GET POLL BY ID=========================================
+//====GET POLL BY ID===========================================================
 function getpollbyid(id, req, res, next){
   polls.find({_id: id}, function(err, poll){
     if(err) throw err;
@@ -25,7 +27,9 @@ function getpollbyid(id, req, res, next){
   })
 }
 
-//====SHOW THE POLLS OF A USER===============================
+//====GET REQUESTS==============================================================
+
+//====GET POLLS OF CURRENT USER --- USER PAGE ==================================
 router.get('/polls', 
   function(req, res, next){
     if(req.user){
@@ -45,7 +49,7 @@ router.get('/polls',
   }
 );
 
-//====GET ALL POLLS===========================================
+//====GET ALL POLLS --- FOR HOME PAGE=====================================
 router.get('/polls/all',
   function(req, res, next){
     getpolldata(null, req, res, next);
@@ -54,7 +58,7 @@ router.get('/polls/all',
     res.jsonp({polls: res.locals.result});
   });
 
-//====GET ONE POLL=============================================
+//====GET ONE POLL --- SINGLE PAGE=========================================
 router.get('/polls/getone/:pollid',
   function(req, res, next){
     if(req.params.pollid){
@@ -71,17 +75,59 @@ router.get('/polls/getone/:pollid',
 
 //=====POST REQUESTS====================================================
 
-router.post('/vote/:pollid', function(req, res, next){
+router.post('/polls/vote/:pollid', function(req, res, next){
+  
   if(req.body.vote && req.params.pollid){
-    polls.findOne({_id: req.params.pollid}, function(err, found){
-      if(err) res.redirect('/');
-      found.updateVotes(+req.body.vote);
-      found.save(function(err){
-        if(err) throw err;
+    //====ADD AN OPTION AND VOTE FOR IT=================================
+    if(req.body.vote=="add"){
+      if(req.body.addoption.length>0){
+        //===FIND ONE POLL BY ID AND RETURN IT==========================
+        polls.findOne({_id: req.params.pollid}, function(err, found){          
+          if(err) res.redirect('/');
+
+          //====ADD AN OPTION TO THE POLL================================
+
+          //====THIS FUNCTION IS PART OF THE PROTOTYPE OF POLLS SCHEMA====
+          //====IT IS DEFINED IN app/mongo/polls.js=======================
+
+          found.addOption(req.body.addoption, res);
+
+          //====CHECK IF THE OPTION IS ADDED=============================
+          if(res.locals.added==="no") {
+            res.redirect('/single?pollid='+req.params.pollid);
+          }
+
+          else {
+            found.save(function(err){
+              if(err) throw err;
+              res.redirect('/single?pollid='+req.params.pollid);
+            });
+          }
+        });
+      }
+      else{
         res.redirect('/single?pollid='+req.params.pollid);
+      }
+    }
+
+    //====VOTE FOR EXISTING OPTION=======================================
+    else {
+      //====FIND POLL BY ID==============================================
+      polls.findOne({_id: req.params.pollid}, function(err, found){
+        if(err) res.redirect('/');
+        //====UPDATE REQUIRED VOTE=======================================
+        //====THIS FUNCTION IS PART OF THE PROTOTYPE OF POLLS SCHEMA=====
+        //====IT IS DEFINED IN app/mongo/polls.js========================
+        found.updateVotes(+req.body.vote);
+        
+        found.save(function(err){
+          if(err) throw err;
+          res.redirect('/single?pollid='+req.params.pollid);
+        });
       });
-    });
+    }
   }
+
   else{
     res.end(JSON.stringify({"error": "Invalid query"}));;
   }
@@ -119,29 +165,6 @@ router.post('/polls',
               res.end(JSON.stringify({"error": "Invalid query"}));
             }
           break;
-
-          //====ADD AN OPTION====================================================
-          case "addoption":
-            if(req.body.pollid && req.body.option){
-              polls.findOne({_id: req.body.pollid}, function(err, found){
-                if(err) throw err;
-                found.addOption(req.body.option, res);
-                if(res.locals.added==="no") {
-                  res.end('Option not added');
-                }
-                else {
-                  found.save(function(err){
-                    if(err) throw err;
-                    res.end();
-                  });
-                }
-              });
-            }
-            else{
-              res.end(JSON.stringify({"error": "Invalid query"}));;
-            }
-            break;
-
           //====INVALID QUERY==================================================
           default:
             res.end(JSON.stringify({"error": "Invalid query"}));;
