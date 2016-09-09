@@ -25,7 +25,6 @@
 .options{
   display: block;
   float: left;
-  overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 50px;
   width: 50%;
@@ -194,8 +193,7 @@
 //====INITIAL STATES FOR ADD-OPTION=========================
 .addoptioncontain{
   height: 2em;
-  overflow-y : hidden;
-
+  
   & .addoption{
     margin: 10px 0 0 0;
     display: block;
