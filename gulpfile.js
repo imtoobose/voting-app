@@ -5,6 +5,7 @@ var
   changed      = require('gulp-changed'),
   babel        = require('gulp-babel'),
   path         = require('path'),
+  uglifycss    = require('gulp-clean-css'),
   browserSync  = require('browser-sync').create();
   nodemon      = require('gulp-nodemon');
 
@@ -13,6 +14,7 @@ gulp.task('sass', function(){
   .pipe(changed('app/static/dist'))
   .pipe(sass()).on('error', sass.logError)
   .pipe(autoprefixer())
+  .pipe(uglifycss())
   .on('end', ()=>console.log('\033[92mSass\033[0m files compiled'))
   .pipe(gulp.dest('app/static/dist/css'))
   .pipe(browserSync.stream());

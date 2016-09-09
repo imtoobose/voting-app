@@ -21,6 +21,7 @@
   }
 }
 
+//====OPTION FORM============================
 .options{
   display: block;
   float: left;
@@ -30,90 +31,224 @@
   width: 50%;
 }
 
-
+//====CONTAINER FOR EXISTING OPTIONS==============
 .optionlist{
   @include nopad;
   padding-left: 20px;
 }
 
+//====LS ITEMS IN OPTIONLIST======================
 .optionlistval{
   display: block;
   float: left;
-  margin: 10px 0px 10px 0px;
+  //padding: 10px 0px 10px 0px;
   position: relative;
   width: 100%;
-}
-
-
-.addoptioncontain{
-  height: 2em;
-  overflow-y : hidden;
-  & .addoption{
-    margin: 10px 0 0 0;
-    display: block;
-  }
-}
-
-.addoptionval{
-  padding-left: 15px;
-  
-  & input.radio, & input[type="radio"]{
-    height: 0;
-    width: 0;
-    visibility: none;
-
-    & + label{
-
-      & .addoptioncontain{
-        height: 0;
-        transition: height 0s 0.2s linear;
-      }
-
-      & .addoption{
-        border: none;
-        height: 1em;
-        transform: translate3d(0%, -200%, 0);
-        transition: transform 0.2s ease-out;
-      }
-    }
-
-    &:checked + label{
-
-      & .addoptioncontain{
-        transition: height 0.2s 0s linear;
-        height:2em;
-      }
-
-      & .addoption {
-        transform: translate3d(0%, 0%, 0);
-      }
-    }
-  }
 }
 
 .votelabel{
   cursor: pointer;
   display: inline-block;
   float: left;
-  margin-left: 50px;
-  margin-top: 10px;
+  padding: 10px 0px 10px 0px;
+  padding-left: 50px;
+  padding-top: 20px;
   position: relative;
+  transition: color 0.2s linear;
   width: 80%;
 }
 
 .vote{
   cursor: pointer;
   display: block;
-  height: 30px;
+  height: 20px;
+  padding: 10px 0px 10px 0px;
   position: absolute;
   top: 50%;
   transform: translate3d(0, -50%, 0);
-  width: 30px;
+  width: 20px;
+  opacity: 0;
+
+  & ~ .check {
+    background: $charcoal;
+    border: solid white 2px;
+    border-radius: 50%;
+    display: block;
+    height: 20px;
+    margin: 3px 3px 0px 5px;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    transition: background 0.2s linear;
+    width: 20px;
+    z-index: -1;
+  }
+
+  &:checked + label, &:hover + label{
+    color: $reallydarkred;
+  }
+
+  &:checked ~ .check, &:hover ~ .check{
+    background: #FFF;
+  }
+
+  &:focus{
+    outline: none;
+  }
+}
+
+//====DIV CONTAINING THE ADD OPTION TO CHART MENU========
+.addoptionval{
+  padding-left: 15px;
+
+  //====RADIO BUTTON TO ENSURE THAT ADD OPTION OR ONE OF=== 
+  //====THE EXISTING OPTIONS HAVE TO BE SELECTED===========
+  & input.radio, & input[type="radio"]{
+    height: 0;
+    width: 0;
+    visibility: none;
+
+    //====LABEL SIBLING===================================
+    & + label{
+      transition: color 0.3s ease-in;
+
+      //====DIV CONTAINING INPUT TEXT FIELD===============
+      & .addoptioncontain{
+        height: auto;
+      }
+
+      //====WRAPPER TO USE BEFORE ELEMENT=================
+      & .addwrapper{
+        display: inline-block;
+        height: auto;
+        max-width: 300px;
+        position: relative;
+        width: 90%;
+
+        //====RED LINE===============================
+        &:before{
+          background: $reallydarkred;
+          content: '';
+          display: block;
+          height: 1px;
+          left: 0;
+          position: absolute;
+          top: 90%;
+          transition: height 0.3s ease-in;
+          width: 100%;
+        }
+
+        &:hover{
+          &:before{
+            height: 3px;
+          }
+        }
+      }
+
+      //====INPUT TEXT FIELD====================
+      & .addoption{
+        @include nopad;
+        background: $charcoal;
+        border: none;
+        color: #FFF;
+        display: inline-block;
+        font-family: $sans;
+        font-size: 1.4em;
+        height: 0;
+        transition: height 0.3s ease-in;
+        width: 100%;
+
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+
+    //====HOVER ANIMATION==========================
+    &:hover +  label{
+      color: $reallydarkred;
+      & .addwrapper{
+        &:before{
+          height: 3px;
+        }
+      }
+    }
+
+    //====OPEN UP WHEN ADD OPTION CLICKED=========
+    &:checked + label{
+      color: $reallydarkred;
+
+      & .addwrapper{
+        &:before{
+          height: 3px;
+        }
+      }
+
+      & .addoption {
+        height: 2em;
+      }
+    }
+  }
+}
+
+//====INITIAL STATES FOR ADD-OPTION=========================
+.addoptioncontain{
+  height: 2em;
+  overflow-y : hidden;
+
+  & .addoption{
+    margin: 10px 0 0 0;
+    display: block;
+  }
 }
 
 .submit{
-  margin-top: 20px;
+  background: $charcoal;
+  border: none;
+  border: solid #FFF 2px;
+  box-shadow: 0px 2px 3px $charcoal;
+  color: #FFF;
+  cursor: pointer;
+  font-family: 'Raleway';
+  font-size: 1.5em;
+  font-weight: 400;
+  height: 1.5em;
+  outline: none;
+  padding: 0px 15px 5px 15px;
+  text-align: center;
+  transition: all 0.2s linear;
+
+  &:hover{
+    background: #FFF;
+    color: $reallydarkred;
+  }
+}
+
+.submitwrapper{
+  display: inline-block;
   margin-left: 60px;
+  margin-top: 20px;
+  position: relative;
+
+  &:before{
+    background: $reallydarkred;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    transition: all 0.3s ease-in;
+    width: 100%;
+    z-index: -100;
+  }
+
+  &:hover{
+    &:before{
+      top: 0;
+      left: 0;
+    }
+  }
 }
 
 @media(max-width: 924px){
@@ -143,7 +278,7 @@
       @include nopad;
     }
 
-    .optionlist, .optionlistval, .submit{
+    .optionlist, .optionlistval{
       padding-left: 0;
     }
   }
