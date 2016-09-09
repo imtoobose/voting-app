@@ -10,6 +10,7 @@ function getpolldata(userid, req, res, next){
 
   polls.find(searchfor, function(err, pollarr){
     if(err) throw err;
+    console.log(pollarr);
     res.locals.result = pollarr;
     next();
   });
@@ -69,6 +70,23 @@ router.get('/polls/getone/:pollid',
 );
 
 //=====POST REQUESTS====================================================
+
+router.post('/vote/:pollid', function(req, res, next){
+  if(req.body.vote && req.params.pollid){
+    polls.findOne({_id: req.params.pollid}, function(err, found){
+      if(err) res.redirect('/');
+      found.updateVotes(+req.body.vote);
+      found.save(function(err){
+        if(err) throw err;
+        res.redirect('/single?pollid='+req.params.pollid);
+      });
+    });
+  }
+  else{
+    res.end(JSON.stringify({"error": "Invalid query"}));;
+  }
+});
+
 router.post('/polls', 
   function(req, res, next){
     if(req.user){
@@ -101,23 +119,6 @@ router.post('/polls',
               res.end(JSON.stringify({"error": "Invalid query"}));
             }
           break;
-
-          //====VOTE ON A POLL================================================
-          case "vote":
-            if(req.body.pollid && req.body.option){
-              polls.findOne({_id: req.body.pollid}, function(err, found){
-                if(err) throw err;
-                found.updateVotes(+req.body.option);
-                found.save(function(err){
-                  if(err) throw err;
-                  res.end();
-                });
-              });
-            }
-            else{
-              res.end(JSON.stringify({"error": "Invalid query"}));;
-            }
-            break;
 
           //====ADD AN OPTION====================================================
           case "addoption":

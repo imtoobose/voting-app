@@ -18,7 +18,7 @@ function createCharts (res, allcharts, detailed){
       a.classList.add('charts');
       a.setAttribute('href', '/single?pollid='+id);
       a.appendChild(canvas);
-      allcharts.appendChild(a);
+      allcharts.insertBefore(a, allcharts.firstChild);
       var chart = new Chart(canvas, config);
   }
 

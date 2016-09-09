@@ -9,8 +9,9 @@ html
         
     div.single
       div.allcharts(id=pollid)
-        form.options(id="votes")
+        form.options(id="votes" method="post" action="vote/"+pollid)
           ul.optionlist(id="optionlist")
+          input.submit(type="submit" value="vote")
           
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
@@ -28,16 +29,19 @@ html
           _in.setAttribute('type', 'radio'),
           _in.setAttribute('name', 'vote'),
           _in.setAttribute('id', id),
+          _in.setAttribute('value', i),
           label.setAttribute('for', id),
           label.classList.add('votelabel'),
           label.innerHTML = arr[i].optionName;
-
+          if(i===0) _in.setAttribute('checked', true);
           li.appendChild(_in),
           li.appendChild(label);
 
           document.getElementById('optionlist').appendChild(li);
         }
       }
+
+      
 
       var a=document.getElementsByClassName('allcharts')[0],
       i=a.getAttribute('id');

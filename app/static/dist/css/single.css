@@ -227,10 +227,11 @@ body {
   display: block; }
   .single .allcharts {
     display: block;
-    margin-top: 20px; }
+    margin-top: 20px;
+    padding: 0 20px 0 20px; }
     .single .allcharts .charts {
       display: inline-block;
-      float: right;
+      float: left;
       position: relative;
       width: 50%; }
       .single .allcharts .charts canvas {
@@ -239,7 +240,7 @@ body {
 
 .options {
   display: block;
-  float: right;
+  float: left;
   padding-bottom: 20px;
   padding-top: 50px;
   width: 50%; }
