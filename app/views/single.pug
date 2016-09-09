@@ -11,11 +11,12 @@ html
       div.allcharts(id=pollid)
         form.options(id="votes" method="post" action="polls/vote/"+pollid)
           ul.optionlist(id="optionlist")
-          div.optionlistval.addoptionval
-            input.radio.addoptionradio.vote(type="radio" id="addoptionradio" name="vote" value="add")
-            label.addoptionradio.votelabel(for="addoptionradio") Add Option
-              div.addoptioncontain
-                input.addoption(id="addoption" type="text" placeholder="Add your own option" name="addoption")
+          if !logged
+            div.optionlistval.addoptionval
+              input.radio.addoptionradio.vote(type="radio" id="addoptionradio" name="vote" value="add")
+              label.addoptionradio.votelabel(for="addoptionradio") Add Option
+                div.addoptioncontain
+                  input.addoption(id="addoption" type="text" placeholder="Add your own option" name="addoption")
           input.submit(type="submit" value="vote")
           
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
