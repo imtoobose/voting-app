@@ -8,6 +8,42 @@ var
   fbconfig     = config.facebookauth,
   googleconfig =  config.googleauth;
 
+function userLogin(through, accessToken, profile, done) {
+  var searchFor;
+  switch(through){
+    case "github": searchFor = {
+      'github.id': profile.id
+    }
+    break;
+    case "facebook": searchFor = {
+      'facebook.id': profile.id
+    }
+    break;
+    case 'google': searchFor = {
+      'google.id': profile.id
+    }
+    break;
+  }
+
+  User.findOne(searchFor, function(err, user){
+    if(err) return done(err);
+
+    if(user){
+      return done(null, user);
+    }
+
+    else{
+      var newUser = new User();
+      newUser[through].id = profile.id;
+      newUser[through].token = accessToken;
+      newUser[through].name = profile.displayName;
+      newUser.save(function(err){
+        if(err) throw err;
+        return done(null, newUser);
+      });
+    }
+  });
+}
 
 module.exports = function(passport){
 
@@ -52,24 +88,7 @@ module.exports = function(passport){
     },
 
     function(accessToken, refreshToken, profile, done){
-      User.findOne({'facebook.id': profile.id}, function(err, user){
-        if(err) return done(err);
-
-        if(user){
-          return done(null, user);
-        }
-
-        else{
-          var newUser = new User();
-          newUser.facebook.id = profile.id;
-          newUser.facebook.token = accessToken;
-          newUser.facebook.name = profile.displayName;
-          newUser.save(function(err){
-            if(err) throw err;
-            return done(null, newUser);
-          });
-        }
-      });
+      userLogin('facebook', accessToken, profile, done);
     }
   ));
 }

@@ -2,6 +2,7 @@
 
 var router = require('express').Router();
 var polls  = require('../mongo/polls');
+var User   = require('../mongo/user');
 
 //====UTILITY FUNCTIONS========================================================
 
@@ -12,7 +13,7 @@ function getpolldata(userid, req, res, next){
 
   polls.find(searchfor, function(err, pollarr){
     if(err) throw err;
-    console.log(pollarr);
+    //console.log(pollarr);
     res.locals.result = pollarr;
     next();
   });
@@ -27,6 +28,29 @@ function getpollbyid(id, req, res, next){
   })
 }
 
+//====ADD POLL TO USER==========================================================
+function addpolltouser(pollid, req, res, next){
+  User.findOne({_id: req.user.id}, function(err, user){
+    user.hasVoted(pollid);
+  
+    user.save(function(err){
+      if(err) throw err;
+      res.redirect('/single?pollid='+req.params.pollid);
+    })
+  })
+}
+
+function addpollsoffline(pollid, req, res, next){
+  console.log(req.session);
+  if(req.session.pollsVoted){
+    req.session.pollsVoted.push(pollid);
+  }
+  else{
+    req.session.pollsVoted= [];
+    req.session.pollsVoted.push(pollid); 
+  }
+  res.redirect('/single?pollid='+req.params.pollid);
+}
 //====GET REQUESTS==============================================================
 
 //====GET POLLS OF CURRENT USER --- USER PAGE ==================================
@@ -42,10 +66,6 @@ router.get('/polls',
   }, 
   function(req, res, next){
     res.jsonp({polls:res.locals.result});
-  //   if(res.locals.result && res.locals.result.length>0){
-  //     console.log(res.locals.result);
-  //   }
-  //   res.render('polls', {logged: (req.user? false: true)});
   }
 );
 
@@ -75,6 +95,44 @@ router.get('/polls/getone/:pollid',
 
 //=====POST REQUESTS====================================================
 
+//====ADD A NEW POLL=====================================================
+router.post('/polls/add', function(req, res, next){
+  if(req.user){
+    var 
+      newPoll  = new polls(),
+      options  = [],
+      voteName = +req.body.voteName;
+
+    for(var i = 0; i< req.body.addoption.length; i++){
+      if(req.body.addoption[i].length>0){
+        options.push({
+          optionName: req.body.addoption[i],
+          votes: 0 
+        })
+      }
+    }
+
+    if(req.body.addoption[voteName-1] && req.body.addoption[(+voteName)-1].length>0){
+      options[(+voteName)-1].votes = 1;
+    }
+
+    newPoll.name      = req.body.pollname;
+    newPoll.options   = options;
+    newPoll.creator   = req.user.id;
+    newPoll.chartType = req.body.chartName;
+    
+    newPoll.save(function(err){
+      if(err) res.redirect('/');
+      res.redirect('/single?pollid='+newPoll._id);
+    });
+  } 
+
+  else{
+    res.end('Unauthorized access');
+  } 
+});
+
+//====ADD OPTION OR VOTE FOR A POLL=====================================
 router.post('/polls/vote/:pollid', function(req, res, next){
   
   if(req.body.vote && req.params.pollid){
@@ -100,6 +158,7 @@ router.post('/polls/vote/:pollid', function(req, res, next){
           else {
             found.save(function(err){
               if(err) throw err;
+              req.user.votedPolls.push(found._id);
               res.redirect('/single?pollid='+req.params.pollid);
             });
           }
@@ -122,7 +181,12 @@ router.post('/polls/vote/:pollid', function(req, res, next){
         
         found.save(function(err){
           if(err) throw err;
-          res.redirect('/single?pollid='+req.params.pollid);
+          if(req.user){
+            addpolltouser(req.params.pollid, req, res, next);
+          }
+          else{
+            addpollsoffline(req.params.pollid, req, res, next);
+          }
         });
       });
     }
@@ -133,51 +197,22 @@ router.post('/polls/vote/:pollid', function(req, res, next){
   }
 });
 
-router.post('/polls', 
-  function(req, res, next){
-    if(req.user){
-      if(req.body && req.body.action){
-        switch(req.body.action){
-          //=====ADD A NEW POLL==========================================
-          case "add":
-            var newPoll = new polls();
-            newPoll.name    = req.body.name;
-            newPoll.options = req.body.options;
-            newPoll.creator = req.user.id;
-            newPoll.chartType = req.body.chartType;
-            console.log(req.user);
-            newPoll.save(function(err){
-              //redirect to 500 page
-              if(err) throw err;
-            });
-            res.end();
-          break;
-
-          //====DELETE A POLL================================================
-          case "delete":
-            if(req.body.pollid){
-              polls.findOneAndRemove({_id: req.body.pollid}, function(err){
-                if(err) throw err;
-              });
-              res.end();
-            }
-            else {
-              res.end(JSON.stringify({"error": "Invalid query"}));
-            }
-          break;
-          //====INVALID QUERY==================================================
-          default:
-            res.end(JSON.stringify({"error": "Invalid query"}));;
-        }
-      }
-      else{
-        res.end(JSON.stringify({"error": "Invalid query"}));;
-      }
+//====DELETE A POLL====================================================
+router.post('/polls/delete/:pollid', function(req, res, next){
+  if(req.user){
+    if(req.params.pollid.length>0){
+      polls.findOneAndRemove({_id: req.params.pollid}, function(err){
+        if(err) throw err;
+      });
+      res.end();
     }
-    else{
-      res.end(JSON.stringify({"error": "Invalid query"}));;
+    else {
+      res.end(JSON.stringify({"error": "Invalid query"}));
     }
   }
-);
+  else{
+    res.end('Unauthorized access');
+  }
+});
 
 module.exports= router;

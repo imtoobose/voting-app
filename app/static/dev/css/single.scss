@@ -11,7 +11,7 @@
       display: inline-block;
       float: left;
       position:relative;
-      width: 50%; 
+      width: 70%; 
 
       & canvas{
         padding-bottom: 15px;
@@ -27,7 +27,7 @@
   float: left;
   padding-bottom: 20px;
   padding-top: 50px;
-  width: 50%;
+  width: 30%;
 }
 
 //====CONTAINER FOR EXISTING OPTIONS==============
@@ -40,7 +40,6 @@
 .optionlistval{
   display: block;
   float: left;
-  //padding: 10px 0px 10px 0px;
   position: relative;
   width: 100%;
 }
@@ -126,15 +125,12 @@
 
         //====RED LINE===============================
         &:before{
+          @include pseudo;
           background: $reallydarkred;
-          content: '';
-          display: block;
           height: 1px;
-          left: 0;
-          position: absolute;
           top: 90%;
           transition: height 0.3s ease-in;
-          width: 100%;
+          z-index: 0;
         }
 
         &:hover{
@@ -193,7 +189,7 @@
 //====INITIAL STATES FOR ADD-OPTION=========================
 .addoptioncontain{
   height: 2em;
-  
+
   & .addoption{
     margin: 10px 0 0 0;
     display: block;
@@ -210,7 +206,7 @@
   font-family: 'Raleway';
   font-size: 1.5em;
   font-weight: 400;
-  height: 1.5em;
+  //height: 1.5em;
   outline: none;
   padding: 0px 15px 5px 15px;
   text-align: center;
@@ -229,15 +225,11 @@
   position: relative;
 
   &:before{
-    background: $reallydarkred;
-    content: '';
-    display: block;
-    height: 100%;
+    @include pseudo;
+    background: $reallydarkred; 
     left: 5px;
-    position: absolute;
     top: 5px;
     transition: all 0.3s ease-in;
-    width: 100%;
     z-index: -100;
   }
 
@@ -267,10 +259,10 @@
 
   .options{
     @include nopad;
-    display: inline-block;
-    float: none;
+    padding: 50px 0 100px 30px;
     position: relative;
     text-align: left;
+    width: 80%;
 
     ul{
       @include nopad;

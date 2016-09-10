@@ -15,6 +15,22 @@ var
   auth      = require(__dirname + '/app/routes/auth'),
   userpolls = require(__dirname +'/app/routes/addpolls');
 
+// var User = require('./app/mongo/user');
+// User.find({}, function(err, users){
+//   console.log(users);
+//   // for(var i=0; i<users.length; i++){
+//   //   users[i].remove();
+//   // }
+// });
+
+// var Polls = require('./app/mongo/polls');
+//  Polls.find({}, function(err, polls){
+//   console.log(polls);
+//   for(var i=0; i<polls.length; i++){
+//     polls[i].remove();
+//   }
+//  });
+
 //====SERVE FAVICOM================================================
 app.use(favicon(path.join(__dirname, "app", "static", "dist", "assets", "favicon.ico")));
 //====MONGOOOSE AND MONGOD==========================================  

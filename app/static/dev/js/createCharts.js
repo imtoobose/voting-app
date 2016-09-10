@@ -1,4 +1,4 @@
-function createCharts (res, allcharts, detailed){
+function createCharts (res, allcharts, detailed, single){
   for (var i=0; i<res.length; i++){
     var config = createConfig(
                   res[i].options.map((data)=> data.votes), 
@@ -7,13 +7,13 @@ function createCharts (res, allcharts, detailed){
                   res[i].chartType.toLowerCase(),
                   detailed
                   );
-    createCanvas(res[i]._id, config);
+    createCanvas(res[i]._id, config, single);
   }
 
-  function createCanvas(id, config){
+  function createCanvas(id, config, single){
       var 
           canvas = document.createElement('canvas'),
-          a      = document.createElement('a');
+          a      = single? document.createElement('div') : document.createElement('a');
 
       a.classList.add('charts');
       a.setAttribute('href', '/single?pollid='+id);

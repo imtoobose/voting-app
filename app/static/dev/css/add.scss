@@ -1,0 +1,172 @@
+@import "utils/navbar.scss";
+@import "utils/checkboxes.scss";
+
+$back: $charcoal-light;
+
+.add{
+  margin: auto;
+  padding-bottom: 30px;
+  text-align: center;
+  width: 80%;
+}
+
+.options{
+  display: inline-block;
+  margin: 0 auto;
+  margin: 50px 0 0 0;
+  padding: 0px 20px 20px 30px;
+  position: relative;
+  text-align: left;
+
+  &:after, &:before{
+    @include pseudo;
+    background: $back;
+    z-index: -200;
+  }
+
+  &:after{
+    box-shadow: 3px 3px 2px fade-out(#000000, 0.5);
+  }
+  &:before{
+    background: $reallydarkred;
+    left: 10px;
+    top: 10px;
+  }
+}
+
+.polloptions{
+  @include nopad;
+  list-style-type: none;
+  padding: 20px 0 20px 0;
+}
+
+.addoptioncontain{
+  padding: 10px 0 10px 0;
+  position: relative;
+}
+
+.activeaddoption{
+  color: $reallydarkred !important;
+}
+
+.addlabel{
+  transition: color 0.2s ease;
+}
+
+.activecontain{
+  color: $reallydarkred;
+}
+
+.optionvote{
+  right: 0;
+  z-index: 100;
+  & + .optioncheck{
+    right: 0;
+    z-index: 1;
+  }
+}
+
+input[type="text"], input.text{
+  @include nopad;
+  background: $back;
+  border: none;
+  border-bottom: solid #FFF 1px;
+  box-shadow: none;
+  color: #FFF;
+  font-family: $sans;
+  font-size: 1.3em;
+  padding: 10px 0 10px 0;
+  transition: border-color, box-shadow 0.2s ease;
+  width: 50vw;
+
+  &:focus{
+    border-color: $reallydarkred;
+    box-shadow: 0px 1px 0px $reallydarkred;
+    outline: none;
+  }
+}
+
+.button{
+  background: $back;
+  border: none;
+  border: solid #FFF 2px;
+  box-shadow: 0px 2px 3px $charcoal;
+  color: #FFF;
+  cursor: pointer;
+  font-family: 'Raleway';
+  font-size: 1.5em;
+  font-weight: 400;
+  height: 1.5em;
+  outline: none;
+  padding: 0px 15px 5px 15px;
+  position: relative;
+  text-align: center;
+  transition: color, background 0.2s linear;
+
+  &:hover{
+    background: #FFF;
+    color: $reallydarkred;
+    &:before{
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.buttonwrapper, .submitwrapper{
+  display: inline-block;
+  margin: 10px 0 30px 0;
+  position: relative;
+}
+
+.button, .submitwrapper{
+  &:before{
+    @include pseudo;
+    background: $reallydarkred;
+    left: 8px;
+    top: 8px;
+    transition: all 0.3s ease-in;
+  }
+  &:hover{
+    &:before{
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+.submitwrapper{
+  &:before{
+    left: 5px;
+    top: 5px;
+  }
+}
+
+#addanother{
+  margin: 0 20px 0 0;
+}
+
+@media(max-width: 924px){
+  .add {
+    width: 90%;
+  }
+  input[type="text"], input.text{
+    width: 70vw;
+  }
+}
+
+@media(max-width:565px){
+  .add{
+    width: 100%;
+  }
+  .options{
+    &:before, &:after{
+      display: none;
+    }
+    
+  }
+
+  input[type="text"], input.text{
+    width: 80vw;
+  }
+}

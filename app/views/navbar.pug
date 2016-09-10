@@ -17,18 +17,28 @@ nav.nav
       a.navbut.login.facebook(href="/auth/facebook") Facebook
       a.navbut.login.google(href="/auth/google") Google
     else
+      - 
+        checkpage = function(p){
+          if (page && page==p){
+            return "activenavbut";
+          }
+          else return '';
+        }
       a.navbut.logout(href="/auth/logout")
         li Logout
-      a.navbut.mypolls(href="/user")
+      a.navbut.mypolls(href="/user" class=checkpage('user'))
         li My Polls
+      a.navbut.addpolls(href="/add" class=checkpage('add'))
+        li Add Poll
 //====MOBILE OVERLAY===================================================
 div.overlaynav(id="overlay-nav" class= (logged? "two":"three"))
   if logged
     a.overlaybut.facebook.odd(href="/auth/facebook") LOGIN WITH FACEBOOK
     a.overlaybut.google.even(href="/auth/google") LOGIN WITH GOOGLE
   else
-    a.overlaybut.mypolls.odd(href="/polls") MY POLLS
-    a.overlaybut.logout.even(href="/auth/logout") LOGOUT
+    a.overlaybut.mypolls.odd(href="/add") ADD POLL
+    a.overlaybut.mypolls.even(href="/polls") MY POLLS
+    a.overlaybut.logout.odd(href="/auth/logout") LOGOUT
 //=====OVERLAY END======================================================
 //=====NAVS END=========================================================
 script.

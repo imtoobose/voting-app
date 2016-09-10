@@ -3,7 +3,7 @@
 //====NAVBAR STYLES========================
 .nav{
   @include nopad;
-  background: hsl(hue($charcoal), 2, 20);
+  background: $charcoal-light;
   border-bottom: 5px solid #F9564F;
   color: white;
   display: block;
@@ -56,6 +56,15 @@
       }
 
       &:hover{
+        border-color: $reallydarkred;
+        color: $reallydarkred;
+      }
+    }
+
+    & .activenavbut{
+      border-color: $reallydarkred;
+      color: $reallydarkred;
+      &:link, &:active{
         border-color: $reallydarkred;
         color: $reallydarkred;
       }

@@ -1,0 +1,57 @@
+doctype html
+html
+  head 
+    title QuickPoll: Add a New Poll
+    link(rel="stylesheet", type="text/css",href="css/add.css")
+    link(href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet")
+  body
+    include navbar.pug
+    div.add
+      form.options(method="post" action="polls/add")
+        ul.polloptions(id="polloptions")
+          li.addoptioncontain
+            label.addlabel(id="contain-0"  for="addoption-0") Your Poll's Name
+            div.addwrapper
+            input.addoption.text(id="addoption-0" type="text" placeholder="Add your own option" name="pollname" autocomplete="off" required)
+
+          li.addoptioncontain
+            label.addlabel(id="contain-1" for="addoption-1") Option 1
+            div.addwrapper
+            input.addoption.text(id="addoption-1" type="text" placeholder="Add your own option" name="addoption" autocomplete="off" required)
+            input.vote.optionvote(id="opt-1" type="radio" name="voteName" value="1" checked)
+            div.check.optioncheck(id="optcheck-"+1)
+            
+          li.addoptioncontain
+            label.addlabel(id="contain-2" for="addoption-2") Option 2
+            div.addwrapper
+            input.addoption.text(id="addoption-2" type="text" placeholder="Add your own option" name="addoption" autocomplete="off" required)
+            input.vote.optionvote(id="opt-2" type="radio" name="voteName" value="2")
+            div.check.optioncheck(id="optcheck-"+2)
+
+        div.buttonwrapper(id="addbut")
+          button.button(id="addanother")
+            |Add Another Option
+
+        div.buttonwrapper(id="deletebut")
+          button.button(id="deleteanother")
+            |Delete Last Option
+
+        div.chartoptions Chart Type
+          ul.optionlist(id="optionlist")
+            - 
+              i = 1;
+              types = ["doughnut", "pie", "bar"],
+              names = ["Doughnut", "Pie", "Bar"];
+
+            while i <= 3
+              li.optionlistval(id="optionlistval-"+i)
+                if(i==1)
+                  input.vote(id="chart-1" type="radio" name="chartName" checked value=types[i-1])
+                else
+                  input.vote(id="chart-"+i type="radio" name="chartName" value=types[i-1])
+                label.votelabel(for="chart-"+i) #{names[i-1]}
+                div.check(id="check-"+i)
+              - i+=1;
+        div.submitwrapper
+          input.button(id="submitall" type="submit" value="Add Poll")
+    script(src="js/addpage.js")

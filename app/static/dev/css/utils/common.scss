@@ -8,6 +8,18 @@
   overflow: hidden;
 }
 
+
+@mixin pseudo{
+  content: ' ';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0; 
+  width: 100%;
+  z-index: -1;
+}
+
 $sandy: #EAD2AC;
 $darkred: #FE938C;
 $reallydarkred: #ED6A5A;
@@ -16,6 +28,7 @@ $darkblue: #4281A4;
 $lightblue: #9CAFB7;
 $platinum: #E6EBE0;
 $charcoal: #1B1B1E;
+$charcoal-light: hsl(hue($charcoal), 3, 15);
 
 $sans: 'Raleway', sans-serif;
 
