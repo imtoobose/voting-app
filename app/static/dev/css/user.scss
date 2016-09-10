@@ -1,0 +1,201 @@
+@import "utils/navbar.scss";
+@import "utils/buttons.scss";
+
+.empty{
+  margin: 30px 0 30px 30px;
+  display: block;
+  font-size: 2.3em;
+  & + .buttonwrapper{
+    float: left !important;
+    font-size: 1.8em !important;
+    margin: 30px 0 30px 30px;
+  }
+}
+
+@media(max-width: 480px){
+  .empty{
+    & + .buttonwrapper{
+      font-size: 1.2em !important;
+      float: none;
+      position: relative;
+      //margin:auto !important;
+    }
+  }
+}
+
+.modal{
+  @include nopad;
+  background: $charcoal-light;
+  border: solid #FFF 2px;
+  box-shadow: 5px 5px 0px $reallydarkred;
+  display: block;
+  left: 50%;
+  max-width: 600px;
+  opacity: 0;
+  padding: 30px 30px 30px 30px;
+  position: fixed;
+  top: 50px;
+  transform: translate3d(-50%, 0, 0);
+  visibility: hidden;
+  width: 80%;
+  z-index: 100;
+  
+  & .cross{
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 20px;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+
+    &:after, &:before{
+      @include pseudo;
+      background: white;
+      height: 20px;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      z-index: 1;
+    }
+
+    &:after{
+      transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    }
+    &:before{
+      transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    }
+
+    &:hover, &:active, &:focus{
+      &:before, &:after{
+        background: $reallydarkred;
+      }
+    }
+  }
+
+  & .title{
+    font-size: 1.3em;
+    padding-bottom: 10px;
+  }
+
+  & .link{
+    background: $charcoal;
+    color: #FFF;
+    font-size: 1.2em;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    width: calc(100% -  20px);
+
+    &::selection{
+      background-color: hsl(hue($reallydarkred), 70, 70);
+    }
+  }
+
+  & .buttonwrapper{
+    margin-right: 15px;
+  }
+}
+
+.visiblemodal{
+  opacity: 1;
+  visibility: visible;
+}
+
+.user{
+  z-index: 1;
+
+  .userpolls{
+    @include nopad;
+    display: block;
+    list-style-type: none;
+    margin: 30px 0 0 0;
+    position: relative;
+  }
+
+  .onepollwrap{
+    @include nopad;
+    margin: 0 auto;
+    position: relative;
+    width: 95%;
+
+    &:after, &:before{
+      @include pseudo;
+      background: $charcoal-light;
+      z-index: -100;
+    }
+
+    &:before{
+      background: $reallydarkred;
+      left: 10px;
+      top: 10px;
+      transition: all 0.2s ease-in;
+    }
+
+    &:hover{
+      
+      &:before{
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+
+  .onepoll{
+    @include clearfix;
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+    margin-top:35px;
+    position: relative;
+  }
+
+  .title{
+    color: #FFF;
+    display: inline-block;
+    float: left;
+    font-size: 1.5em;
+    padding: 10px 0 10px 0;
+    text-decoration: none;
+    transition: color 0.2 ease-in;
+
+    &:link, &:active{
+      color: #FFF;
+    }
+
+    &:hover{
+      color: $reallydarkred;
+    }
+  }
+
+  .pollbuttons{    
+    display: inline-block;
+    float: right;
+  }
+
+  .buttonwrapper{
+    float: right;
+    font-size: 0.8em;
+    margin-right: 20px;
+  }
+
+}
+
+.mobilebut{
+  display: none;
+}
+
+@media(max-width:700px){
+  .user{
+
+    .title{
+      width: auto;
+    }
+
+    .pollbuttons{
+      width: auto;
+    }
+  }
+}

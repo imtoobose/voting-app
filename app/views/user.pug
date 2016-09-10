@@ -2,21 +2,33 @@ doctype html
 html
   head 
     title QuickPoll: My Polls
-    link(rel="stylesheet", type="text/css",href="css/home.css")
+    link(rel="stylesheet" href="css/user.css")
     link(href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet")
   body
     include navbar.pug
+
+    div.modal(id="modalcontain")
+      button.cross(id="modal-cross")
+      div.title
+        |Share this poll!
+      input.link(id="modal-link" value="http://localhost:3000/single?pollid=57d403b35e8e004478b7df0b" readonly)
+      div.buttons
+        a.buttonwrapper.modalwrapper(href="#" target="_blank")
+          button.button Facebook
+        a.buttonwrapper.modalwrapper(href="#" target="_blank")
+          button.button Google &plus;
+        a.buttonwrapper.modalwrapper(target="_blank" href="#")
+          button.button Twitter
+        a.buttonwrapper.modalwrapper.mobilebut(href="#")
+          button.button Whatsapp
         
-    div.home
-      div.allcharts(id="allcharts")
+    div.user
+      div.empty
+        |Looks like you haven't 
+        |added any polls yet. :(
+      a.buttonwrapper(href="/add")
+        button.button ADD A NEW POLL
+      ul.userpolls(id="userpolls")
+
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
-    script(src="js/createCharts.js")
-    script.
-      qwest.get('/polls')
-      .then((xhr, response)=>{
-        createCharts(response.polls, document.getElementById('allcharts'), false);
-      })
-      .catch((e)=> {
-        console.log(e);
-      });
+    script(src="js/userpage.js")

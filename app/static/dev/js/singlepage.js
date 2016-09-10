@@ -34,6 +34,9 @@ var
   i = a.getAttribute('id');
 qwest.get('/polls/getone/'+i)
   .then((x, r)=>{
+  if(r.error){
+    window.location = '/404';
+  }
   createCharts(r.poll, a, true, true);
   createVotes(r.poll[0].options);
   })

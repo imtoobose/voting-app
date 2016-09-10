@@ -1,7 +1,8 @@
 @import "utils/navbar.scss";
 @import "utils/checkboxes.scss";
+@import "utils/buttons.scss";
 
-$back: $charcoal-light;
+$charcoal-light: $charcoal-light;
 
 .add{
   margin: auto;
@@ -20,7 +21,7 @@ $back: $charcoal-light;
 
   &:after, &:before{
     @include pseudo;
-    background: $back;
+    background: $charcoal-light;
     z-index: -200;
   }
 
@@ -68,7 +69,7 @@ $back: $charcoal-light;
 
 input[type="text"], input.text{
   @include nopad;
-  background: $back;
+  background: $charcoal-light;
   border: none;
   border-bottom: solid #FFF 1px;
   box-shadow: none;
@@ -83,62 +84,6 @@ input[type="text"], input.text{
     border-color: $reallydarkred;
     box-shadow: 0px 1px 0px $reallydarkred;
     outline: none;
-  }
-}
-
-.button{
-  background: $back;
-  border: none;
-  border: solid #FFF 2px;
-  box-shadow: 0px 2px 3px $charcoal;
-  color: #FFF;
-  cursor: pointer;
-  font-family: 'Raleway';
-  font-size: 1.5em;
-  font-weight: 400;
-  height: 1.5em;
-  outline: none;
-  padding: 0px 15px 5px 15px;
-  position: relative;
-  text-align: center;
-  transition: color, background 0.2s linear;
-
-  &:hover{
-    background: #FFF;
-    color: $reallydarkred;
-    &:before{
-      left: 0;
-      top: 0;
-    }
-  }
-}
-
-.buttonwrapper, .submitwrapper{
-  display: inline-block;
-  margin: 10px 0 30px 0;
-  position: relative;
-}
-
-.button, .submitwrapper{
-  &:before{
-    @include pseudo;
-    background: $reallydarkred;
-    left: 8px;
-    top: 8px;
-    transition: all 0.3s ease-in;
-  }
-  &:hover{
-    &:before{
-      top: 0;
-      left: 0;
-    }
-  }
-}
-
-.submitwrapper{
-  &:before{
-    left: 5px;
-    top: 5px;
   }
 }
 

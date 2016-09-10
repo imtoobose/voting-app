@@ -37,7 +37,7 @@ router.get('/user',
       res.end();
     }
     else{
-      res.end('Unauthorized access');
+      res.redirect('/401');
     }
 });
 
@@ -48,7 +48,28 @@ router.get('/add',
     if(req.user)
       res.render('add', {logged: !loggedin, page: 'add'});
     else
-      res.redirect('/');
+      res.redirect('/401');
 })
 
+//====ERROR PAGES========================================================
+
+//====404 PAGE NOT FOUND=================================================
+router.get('/404',
+  function(req, res, next){
+    res.status('404');
+    res.end('The page you are looking for does not exist');
+  });
+
+//====500 INTERNAL SERVER ERROR=========================================
+router.get('/500', 
+  function(req, res, next){
+    res.status('500');
+    res.end('Internal server error');
+});
+
+//====401 UNAUTHORIZED ACCESS==============================================
+router.get('/401',
+  function(req, res, next){
+    res.status('401').end('Unauthorized access');
+  })
 module.exports= router;

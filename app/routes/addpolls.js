@@ -12,19 +12,27 @@ function getpolldata(userid, req, res, next){
   if(userid) searchfor.creator = userid;
 
   polls.find(searchfor, function(err, pollarr){
-    if(err) throw err;
-    //console.log(pollarr);
-    res.locals.result = pollarr;
-    next();
+    if(err) {
+      res.redirect('/')
+    }
+
+    else{
+      res.locals.result = pollarr;
+      next();
+    }
   });
 }
 
 //====GET POLL BY ID===========================================================
 function getpollbyid(id, req, res, next){
   polls.find({_id: id}, function(err, poll){
-    if(err) throw err;
-    res.locals.poll = poll;
-    next();
+    if(err) {
+      res.redirect('/404');
+    }
+    else{
+      res.locals.poll = poll;
+      next();
+    }
   })
 }
 
@@ -34,14 +42,18 @@ function addpolltouser(pollid, req, res, next){
     user.hasVoted(pollid);
   
     user.save(function(err){
-      if(err) throw err;
-      res.redirect('/single?pollid='+req.params.pollid);
+      if(err) {
+        console.log(err);
+        res.redirect('/500');
+      }
+      else
+        res.redirect('/single?pollid='+req.params.pollid);
     })
   })
 }
 
+//====ADD POLL TO OFFLINE STORAGE TO PREVENT DOUBLE VOTING===================
 function addpollsoffline(pollid, req, res, next){
-  console.log(req.session);
   if(req.session.pollsVoted){
     req.session.pollsVoted.push(pollid);
   }
@@ -51,6 +63,7 @@ function addpollsoffline(pollid, req, res, next){
   }
   res.redirect('/single?pollid='+req.params.pollid);
 }
+
 //====GET REQUESTS==============================================================
 
 //====GET POLLS OF CURRENT USER --- USER PAGE ==================================
@@ -60,8 +73,9 @@ router.get('/polls',
       getpolldata(req.user.id, req, res, next);
     }
     else{
-      //redirect to 401 page later
-      res.end('errorwoops');
+      res.redirect('/401');
+      res.end();
+      return;
     }
   }, 
   function(req, res, next){
@@ -122,13 +136,16 @@ router.post('/polls/add', function(req, res, next){
     newPoll.chartType = req.body.chartName;
     
     newPoll.save(function(err){
-      if(err) res.redirect('/');
+      if(err) {
+        console.log(err);
+        res.redirect('/500');
+      }
       res.redirect('/single?pollid='+newPoll._id);
     });
   } 
 
   else{
-    res.end('Unauthorized access');
+    res.redirect('/401');
   } 
 });
 
@@ -141,7 +158,10 @@ router.post('/polls/vote/:pollid', function(req, res, next){
       if(req.body.addoption.length>0){
         //===FIND ONE POLL BY ID AND RETURN IT==========================
         polls.findOne({_id: req.params.pollid}, function(err, found){          
-          if(err) res.redirect('/');
+          if(err) {
+            console.log(err);
+            res.redirect('/404');
+          }
 
           //====ADD AN OPTION TO THE POLL================================
 
@@ -157,7 +177,10 @@ router.post('/polls/vote/:pollid', function(req, res, next){
 
           else {
             found.save(function(err){
-              if(err) throw err;
+              if(err) {
+                console.log(err);
+                res.redirect('/500');
+              }
               req.user.votedPolls.push(found._id);
               res.redirect('/single?pollid='+req.params.pollid);
             });
@@ -173,7 +196,10 @@ router.post('/polls/vote/:pollid', function(req, res, next){
     else {
       //====FIND POLL BY ID==============================================
       polls.findOne({_id: req.params.pollid}, function(err, found){
-        if(err) res.redirect('/');
+        if(err) {
+          console.log(err);
+          res.redirect('/500');
+        }
         //====UPDATE REQUIRED VOTE=======================================
         //====THIS FUNCTION IS PART OF THE PROTOTYPE OF POLLS SCHEMA=====
         //====IT IS DEFINED IN app/mongo/polls.js========================
@@ -193,7 +219,7 @@ router.post('/polls/vote/:pollid', function(req, res, next){
   }
 
   else{
-    res.end(JSON.stringify({"error": "Invalid query"}));;
+    res.redirect('/500');
   }
 });
 
@@ -201,17 +227,34 @@ router.post('/polls/vote/:pollid', function(req, res, next){
 router.post('/polls/delete/:pollid', function(req, res, next){
   if(req.user){
     if(req.params.pollid.length>0){
-      polls.findOneAndRemove({_id: req.params.pollid}, function(err){
-        if(err) throw err;
+      polls.findOne({_id: req.params.pollid}, function(err, found){
+        if(err){
+          console.log(err);
+          res.redirect('/user');
+        }
+
+        if(found.creator == req.user.id){
+          found.remove(function(error){
+            if(error){
+              console.log(error);
+              res.redirect('/500');
+            }
+            else{
+              res.redirect('/user');
+            }
+          });
+        }
+        else{
+          res.redirect('/user');
+        }
       });
-      res.end();
     }
     else {
-      res.end(JSON.stringify({"error": "Invalid query"}));
+      res.redirect('/404');
     }
   }
   else{
-    res.end('Unauthorized access');
+    res.redirect('/401');
   }
 });
 

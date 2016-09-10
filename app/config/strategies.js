@@ -64,20 +64,7 @@ module.exports = function(passport){
     passReqToCallback   : true
   },
     function(request, accessToken, refreshToken, profile, done){
-      User.findOne({'google.id': profile.id}, function(err, user){
-        if(err) return done(err);
-        if(user) return done(null, user);
-        else{
-          var newUser = new User();
-          newUser.google.id = profile.id;
-          newUser.google.token = accessToken;
-          newUser.google.name = profile.displayName;
-          newUser.save(function(err){
-            if(err) throw err;
-            return done(null, newUser);
-          });
-        }
-      });
+      userLogin('google', accessToken, profile, done);
     }
   ));
 

@@ -24,6 +24,9 @@ function createVotes(arr) {
 var a = document.getElementsByClassName('allcharts')[0],
     i = a.getAttribute('id');
 qwest.get('/polls/getone/' + i).then(function (x, r) {
+  if (r.error) {
+    window.location = '/404';
+  }
   createCharts(r.poll, a, true, true);
   createVotes(r.poll[0].options);
 }).catch(function (e) {
