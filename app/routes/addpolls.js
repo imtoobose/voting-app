@@ -47,7 +47,7 @@ function addpolltouser(pollid, req, res, next){
         res.redirect('/500');
       }
       else
-        res.redirect('/single?pollid='+req.params.pollid);
+        res.redirect('/single?pollid='+pollid);
     })
   })
 }
@@ -140,7 +140,9 @@ router.post('/polls/add', function(req, res, next){
         console.log(err);
         res.redirect('/500');
       }
-      res.redirect('/single?pollid='+newPoll._id);
+      else{
+        addpolltouser(newPoll._id, req, res, next);
+      }
     });
   } 
 
@@ -181,12 +183,19 @@ router.post('/polls/vote/:pollid', function(req, res, next){
                 console.log(err);
                 res.redirect('/500');
               }
-              req.user.votedPolls.push(found._id);
-              res.redirect('/single?pollid='+req.params.pollid);
+              else{
+                if(req.user){
+                  addpolltouser(req.params.pollid, req, res, next);
+                }
+                else{
+                  res.redirect('/401');
+                }
+              }
             });
           }
         });
       }
+
       else{
         res.redirect('/single?pollid='+req.params.pollid);
       }

@@ -15,22 +15,6 @@ var
   auth      = require(__dirname + '/app/routes/auth'),
   userpolls = require(__dirname +'/app/routes/addpolls');
 
-// var User = require('./app/mongo/user');
-// User.find({}, function(err, users){
-//   console.log(users);
-//   // for(var i=0; i<users.length; i++){
-//   //   users[i].remove();
-//   // }
-// });
-
-// var Polls = require('./app/mongo/polls');
-//  Polls.find({}, function(err, polls){
-//   console.log(polls);
-//   for(var i=0; i<polls.length; i++){
-//     polls[i].remove();
-//   }
-//  });
-
 //====SERVE FAVICOM================================================
 app.use(favicon(path.join(__dirname, "app", "static", "dist", "assets", "favicon.ico")));
 //====MONGOOOSE AND MONGOD==========================================  
@@ -44,11 +28,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
   secret: 'oh121hellofedfj',
-  /*cookie:{
+  cookie:{
     maxAge: 1000*60*60*24*5
-  },*/
-  resave: true,
-  saveUninitialized: true
+  },
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());

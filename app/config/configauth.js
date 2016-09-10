@@ -11,5 +11,11 @@ module.exports= {
     'secret': 'Vg3AQ0cSGNAJausFmrZf_RVU',
     'callbackURL': 'http://127.0.0.1:8080/auth/google/callback',
     'passReqToCallback'   : true
+  },
+  "githubauth":{
+    'name'     : 'QuickPoll',
+    'clientID' : 'f409e33dacdc5249620d',
+    'secret'   : 'cb5f764539eda73c6aec1241a62c6b2de6b0fc30',
+    'callbackURL': 'http://localhost:8080/auth/github/callback'
   }
 }

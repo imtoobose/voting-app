@@ -1,12 +1,14 @@
 var
   FacebookStrategy = require('passport-facebook').Strategy,
-  GoogleStrategy   = require('passport-google-oauth2').Strategy;
+  GoogleStrategy   = require('passport-google-oauth2').Strategy,
+  GithubStrategy   = require('passport-github2').Strategy;
 
 var
   User         = require('../mongo/user'),
   config       = require('./configauth'),
   fbconfig     = config.facebookauth,
-  googleconfig =  config.googleauth;
+  googleconfig = config.googleauth,
+  githubconfig = config.githubauth;
 
 function userLogin(through, accessToken, profile, done) {
   var searchFor;
@@ -34,9 +36,9 @@ function userLogin(through, accessToken, profile, done) {
 
     else{
       var newUser = new User();
-      newUser[through].id = profile.id;
+      newUser[through].id    = profile.id;
       newUser[through].token = accessToken;
-      newUser[through].name = profile.displayName;
+      newUser[through].name  = profile.displayName;
       newUser.save(function(err){
         if(err) throw err;
         return done(null, newUser);
@@ -76,6 +78,16 @@ module.exports = function(passport){
 
     function(accessToken, refreshToken, profile, done){
       userLogin('facebook', accessToken, profile, done);
+    }
+  ));
+
+  passport.use(new GithubStrategy({
+      clientID: githubconfig.clientID,
+      clientSecret: githubconfig.secret,
+      callbackURL: githubconfig.callbackURL
+    },
+    function(accessToken, refreshToken, profile, done){
+      userLogin('github', accessToken, profile, done);
     }
   ));
 }

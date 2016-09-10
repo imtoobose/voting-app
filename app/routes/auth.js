@@ -11,8 +11,7 @@ module.exports= function(passport){
 
   router.get('/facebook/callback', 
     passport.authenticate('facebook', {
-      //successRedirect: '/',
-      successRedirect: 'localhost:3000',
+      successRedirect: '/',
       failureRedirect: '/'
     }));
 
@@ -30,6 +29,18 @@ module.exports= function(passport){
       failureRedirect:'/'
     }));
 
+  router.get('/github',
+    passport.authenticate('github', {
+      successRedirect: '/',
+      failureRedirect: '/'
+    }));
+
+  router.get('/github/callback', 
+    passport.authenticate('github',
+    {
+      successRedirect:'/',
+      failureRedirect:'/'
+    }));
   //====LOGOUT USER==============================================
   router.get('/logout', 
     function(req, res, next){
