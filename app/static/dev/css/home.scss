@@ -1,18 +1,23 @@
 @import "utils/navbar.scss";
 
 .home {
+
   & canvas{
-    float: left;
     box-shadow: 0px 2px 5px fade-out(#000, 0.8);
+    float: left;
     padding-bottom: 15px;
     transition: transform 0.2s linear;
+
     &:hover{
       transform: scale(1.03);
     }
+
   }
+
   & .allcharts {
     display:block; 
     margin-top:20px;
+
     & .charts{
       display: inline-block;
       padding: 0.5%;
@@ -23,9 +28,11 @@
 
 @media (max-width: 924px){
   .home{
+
     & .allcharts{
+
       & .charts{
-        width: 49%;
+        width: 48%;
       }
     }
   }
@@ -33,10 +40,13 @@
 
 @media(max-width: 565px){
   .home{
+
     & .allcharts{
+
       & .charts{
         margin-bottom: 3em;
         width: 99%;
+
         & canvas:hover{
           transform: none;
         }

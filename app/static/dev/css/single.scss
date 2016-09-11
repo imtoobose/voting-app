@@ -1,5 +1,6 @@
 @import "utils/navbar.scss";
 @import "utils/checkboxes.scss";
+@import "utils/buttons.scss";
 
 .single {
   display: block;
@@ -138,49 +139,9 @@
   }
 }
 
-.submit{
-  background: $charcoal;
-  border: none;
-  border: solid #FFF 2px;
-  box-shadow: 0px 2px 3px $charcoal;
-  color: #FFF;
-  cursor: pointer;
-  font-family: 'Raleway';
-  font-size: 1.5em;
-  font-weight: 400;
-  //height: 1.5em;
-  outline: none;
-  padding: 0px 15px 5px 15px;
-  text-align: center;
-  transition: all 0.2s linear;
-
-  &:hover{
-    background: #FFF;
-    color: $reallydarkred;
-  }
-}
-
 .submitwrapper{
-  display: inline-block;
   margin-left: 60px;
   margin-top: 20px;
-  position: relative;
-
-  &:before{
-    @include pseudo;
-    background: $reallydarkred; 
-    left: 5px;
-    top: 5px;
-    transition: all 0.3s ease-in;
-    z-index: -100;
-  }
-
-  &:hover{
-    &:before{
-      top: 0;
-      left: 0;
-    }
-  }
 }
 
 @media(max-width: 924px){

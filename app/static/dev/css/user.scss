@@ -1,10 +1,13 @@
 @import "utils/navbar.scss";
 @import "utils/buttons.scss";
 
+//====CONTAINER FOR TEXT WHEN NO POLLS ARE ADDED===========
 .empty{
-  margin: 30px 0 30px 30px;
   display: block;
   font-size: 2.3em;
+  margin: 30px 0 30px 30px;
+
+  //====REDIRECT TO ADD POLLS PAGE==========================
   & + .buttonwrapper{
     float: left !important;
     font-size: 1.8em !important;
@@ -12,17 +15,22 @@
   }
 }
 
+//====TO REMOVE THE EMPTY CLASS==============================
+.invisible{
+  display: none !important;
+}
+
 @media(max-width: 480px){
   .empty{
     & + .buttonwrapper{
-      font-size: 1.2em !important;
       float: none;
+      font-size: 1.2em !important;
       position: relative;
-      //margin:auto !important;
     }
   }
 }
 
+//====MODAL FOR SHARING POLLS===================================
 .modal{
   @include nopad;
   background: $charcoal-light;
@@ -40,6 +48,7 @@
   width: 80%;
   z-index: 100;
   
+  //====CROSS FOR CLOSING MODAL=======================
   & .cross{
     background: none;
     border: none;
@@ -51,6 +60,7 @@
     top: 10px;
     width: 20px;
 
+    //====CREATE CROSS WITH PSEUDO ELEMENTS================
     &:after, &:before{
       @include pseudo;
       background: white;
@@ -75,11 +85,13 @@
     }
   }
 
+  //====TITLE OF MODAL==============================
   & .title{
     font-size: 1.3em;
     padding-bottom: 10px;
   }
 
+  //====LINK TO POLL================================
   & .link{
     background: $charcoal;
     color: #FFF;
@@ -99,14 +111,17 @@
   }
 }
 
+//====FOR WHEN MODAL IS VISIBLE==========================
 .visiblemodal{
   opacity: 1;
   visibility: visible;
 }
 
+//====MAIN BODY OF PAGE=================================
 .user{
   z-index: 1;
 
+  //====CONTAINS THE POLLS INFO=======================
   .userpolls{
     @include nopad;
     display: block;
@@ -115,43 +130,43 @@
     position: relative;
   }
 
+  //====WRAPPER OF EVERY BLOCK==========================
   .onepollwrap{
     @include nopad;
     margin: 0 auto;
     position: relative;
     width: 95%;
 
+    //====ADD THE BACKGROUND AND RED CARD================
     &:after, &:before{
       @include pseudo;
       background: $charcoal-light;
+      transition: all 0.2s ease-in;
       z-index: -100;
+    }
+
+    &:after{
+      box-shadow: 6px 4px 3px fade-out(#000, 0.3);
     }
 
     &:before{
       background: $reallydarkred;
       left: 10px;
       top: 10px;
-      transition: all 0.2s ease-in;
-    }
-
-    &:hover{
-      
-      &:before{
-        left: 0;
-        top: 0;
-      }
     }
   }
 
+  //====POLL DIV==================================
   .onepoll{
     @include clearfix;
     display: block;
     margin: 0 auto;
-    width: 95%;
     margin-top:35px;
     position: relative;
+    width: 95%;
   }
 
+  //====TITLE OF POLL====================================
   .title{
     color: #FFF;
     display: inline-block;
@@ -170,11 +185,13 @@
     }
   }
 
+  //====CONTAINS SHARE AND DELETE BUTTONS====================
   .pollbuttons{    
     display: inline-block;
     float: right;
   }
 
+  //====CONTAINS THE BUTTON=================================
   .buttonwrapper{
     float: right;
     font-size: 0.8em;
@@ -183,10 +200,12 @@
 
 }
 
+//==== FOR REMOVING WHATSAPP SHARE BUTTON==================
 .mobilebut{
   display: none;
 }
 
+//====MOBILE VIEW==========================================
 @media(max-width:700px){
   .user{
 

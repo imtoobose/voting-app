@@ -11,22 +11,27 @@ html
       div.allcharts(id=pollid)
         form.options(id="votes" method="post" action="polls/vote/"+pollid autocomplete="off")
           if !hasVoted
+            //VOTE OPTIONS------------------------------------------------------
             ul.optionlist(id="optionlist")
             
           if !logged && !hasVoted
+            //ADD ANOTHER OPTION IF AUTHORIZED------------------------------------------
             div.optionlistval.addoptionval
               input.radio.addoptionradio.vote(type="radio" id="addoptionradio" name="vote" value="add")
               label.addoptionradio.votelabel(for="addoptionradio") Add Your Own Option
                 div.addoptioncontain
                   div.addwrapper
                     input.addoption(id="addoption" type="text" placeholder="Add your own option" name="addoption")
+
           if !hasVoted
             div.submitwrapper
-              input.submit(type="submit" value="vote")
+              input.submit.button(type="submit" value="vote")
+
           else 
             div.submitwrapper(style="margin-left:0px")
-              div.submit(style="padding:5px 5px 5px 5px;")
+              div.button(style="padding:5px 5px 5px 5px;")
                 | You have already voted
+
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.4.5/qwest.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js")
     script(src="js/createCharts.js")

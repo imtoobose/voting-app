@@ -33,6 +33,12 @@ var $modalWrap = getId('modalcontain'),
 //====BELONGING TO THE USER===========================================
 qwest.get('/polls').then(function (xhr, response) {
   var polls = response.polls;
+
+  if (polls.length > 0) {
+    getId('empty').classList.add('invisible');
+    getId('emptybutton').classList.add('invisible');
+  }
+
   for (var i = 0; i < polls.length; i++) {
     createDivs(polls[i]);
   }

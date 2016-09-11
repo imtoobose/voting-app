@@ -29,6 +29,7 @@ module.exports= function(passport){
       failureRedirect:'/'
     }));
 
+  //====GITHUB AUTHORIZATION============================================
   router.get('/github',
     passport.authenticate('github', {
       successRedirect: '/',
@@ -41,6 +42,7 @@ module.exports= function(passport){
       successRedirect:'/',
       failureRedirect:'/'
     }));
+  
   //====LOGOUT USER==============================================
   router.get('/logout', 
     function(req, res, next){

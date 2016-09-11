@@ -23,10 +23,10 @@ html
           button.button Whatsapp
         
     div.user
-      div.empty
+      div.empty(id="empty")
         |Looks like you haven't 
         |added any polls yet. :(
-      a.buttonwrapper(href="/add")
+      a.buttonwrapper(id="emptybutton" href="/add")
         button.button ADD A NEW POLL
       ul.userpolls(id="userpolls")
 
