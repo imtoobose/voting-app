@@ -4,6 +4,7 @@ var
   sass         = require('gulp-sass'),
   changed      = require('gulp-changed'),
   babel        = require('gulp-babel'),
+  uglify       = require('gulp-uglify'),
   path         = require('path'),
   uglifycss    = require('gulp-clean-css'),
   browserSync  = require('browser-sync').create();
@@ -28,6 +29,7 @@ gulp.task('staticjs', function(){
     }))
   .on('end', ()=> console.log('\033[92mBabel\033[0m transpiled'))
   .on('error', (e)=> console.log(e))
+  .pipe(uglify())
   .pipe(gulp.dest('app/static/dist'))
   .on('end', ()=> console.log('\033[92mCompiled and saved static js\033[0m'))
   .pipe(browserSync.stream());

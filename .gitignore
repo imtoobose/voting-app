@@ -2,3 +2,4 @@ node_modules
 .sass-cache
 data
 *.sublime-workspace
+app/config/configauth.js

@@ -4,7 +4,7 @@
   "description": "Voting app for FCC",
   "main": "server.js",
   "scripts": {
-    "start":"server.js",
+    "start": "server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -40,5 +40,6 @@
     "gulp-clean-css": "^2.0.12",
     "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0"
   }
 }
