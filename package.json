@@ -4,6 +4,7 @@
   "description": "Voting app for FCC",
   "main": "server.js",
   "scripts": {
+    "start":"server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,16 +25,14 @@
     "mongoose": "^4.6.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
+    "passport-github2": "^0.1.10",
     "passport-google-oauth2": "^0.1.6",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
-    "body-parser": "^1.15.2",
     "browser-sync": "^2.15.0",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-babel": "^6.1.2",
@@ -41,8 +40,5 @@
     "gulp-clean-css": "^2.0.12",
     "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^2.3.2",
-    "passport": "^0.3.2",
-    "passport-github2": "^0.1.10",
-    "pug": "^2.0.0-beta6"
   }
 }
