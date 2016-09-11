@@ -41,3 +41,19 @@ body{
   background: $charcoal;
   color: #FFF;
 }
+
+a.charts{
+  color: #FFFFFF;
+  text-decoration: none !important;
+  font-size: 0.8em;
+  &:link, &:active{
+    color: #FFFFFF;
+  }
+}
+
+h1.chartname{
+  color: #FFF !important;
+  text-align: center;
+  text-decoration: none !important;
+  font-weight: 300;
+}

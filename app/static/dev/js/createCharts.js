@@ -13,10 +13,15 @@ function createCharts (res, allcharts, detailed, single){
   function createCanvas(id, config, single){
       var 
           canvas = document.createElement('canvas'),
+          h1     = document.createElement('h1'),
           a      = single? document.createElement('div') : document.createElement('a');
+
+      h1.classList.add('chartname'),
+      h1.innerHTML = res[i].name;
 
       a.classList.add('charts');
       a.setAttribute('href', '/single?pollid='+id);
+      a.appendChild(h1);
       a.appendChild(canvas);
       allcharts.insertBefore(a, allcharts.firstChild);
       var chart = new Chart(canvas, config);
@@ -59,14 +64,6 @@ function createCharts (res, allcharts, detailed, single){
               }],
           },
           options: {
-              title : {
-                  display: true,
-                  position: 'top',
-                  text: title,
-                  fontColor: '#FFF',
-                  fontSize: 22,
-                  fontStyle: 'normal'
-              },
               legend: {
                   display: (detailed? (type=='pie'||type=='doughnut' ? true: false) : false),
                   position: 'bottom',

@@ -51,7 +51,7 @@ $textarea.addEventListener('click', function(e){
 });
 
 //====ADD WHATSAPP SHARE BUTTON IF MOBILE================================
-if(!window.mobilecheck){
+if(window.mobilecheck()){
   $modals[3].classList.remove('mobilebut');
 }
 

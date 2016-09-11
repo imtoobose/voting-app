@@ -228,11 +228,13 @@
 
     & .even{
       background: $reallydarkred;
-      color: #FFF;
+      color: #FFFFFF !important;
     }
   }
 }
-
+.even{
+  color: #FFFFFF !important;
+}
 @media (max-width: 565px){
   .nav{
     & .navs{
