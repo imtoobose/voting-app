@@ -158,6 +158,10 @@
   }
 }
 
+.navbut.login{
+  cursor: pointer;
+}
+
 //====OVERLAY FOR MOBILE NAVBAR================================
 .overlaynav{
   height: 0;
@@ -197,7 +201,7 @@
         cursor: pointer;
         display: block;
       }
-      & a.navbut{
+      & .navbut.login{
         display: none;
       }
       & a.logo{

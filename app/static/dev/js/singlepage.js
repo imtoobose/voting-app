@@ -41,4 +41,12 @@ qwest.get('/polls/getone/'+i)
   createVotes(r.poll[0].options);
   })
   .catch((e)=>{console.log(e);});
-console.log(localStorage);
+
+var $cross = document.getElementById('modal-cross');
+var $modal = document.getElementById('modalcontain');
+document.getElementById('authlogin').addEventListener('click', function(e){
+  $modal.classList.add('visiblemodal');
+})
+$cross.addEventListener('click', function(e){
+  $modal.classList.remove('visiblemodal');
+})

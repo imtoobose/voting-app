@@ -6,6 +6,8 @@ html
     link(href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet")
   body
     include navbar.pug
+    if logged
+      include loginmodal.pug
         
     div.single
       div.allcharts(id=pollid)

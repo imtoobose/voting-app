@@ -1,0 +1,11 @@
+div.modal(id="modalcontain")
+  button.cross(id="modal-cross")
+  div.title
+    |Login with OAuth:
+  div.buttons
+    a.buttonwrapper.modalwrapper(href="auth/facebook")
+      button.button Facebook
+    a.buttonwrapper.modalwrapper(href="auth/google")
+      button.button Google
+    a.buttonwrapper.modalwrapper(href="auth/github")
+      button.button Github

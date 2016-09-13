@@ -1,0 +1,103 @@
+body{
+  transform-style: preserve-3d;
+}
+
+.modal{
+  @include nopad;
+  background: $charcoal-light;
+  border: solid #FFF 2px;
+  box-shadow: 5px 5px 0px $reallydarkred;
+  display: block;
+  left: 50%;
+  max-width: 600px;
+  opacity: 0;
+  padding: 30px 30px 30px 30px;
+  position: fixed;
+  top: 50px;
+  transform: translate3d(-50%, 0, 50px) rotate3d(1, 0, 0, -10deg);
+  transition: transform 0.2s ease-in;
+  visibility: hidden;
+  width: 80%;
+  z-index: 100;
+  
+  //====CROSS FOR CLOSING MODAL=======================
+  & .cross{
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 20px;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+
+    //====CREATE CROSS WITH PSEUDO ELEMENTS================
+    &:after, &:before{
+      @include pseudo;
+      background: white;
+      height: 20px;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      z-index: 1;
+    }
+
+    &:after{
+      transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    }
+    &:before{
+      transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    }
+
+    &:hover, &:active, &:focus{
+      &:before, &:after{
+        background: $reallydarkred;
+      }
+    }
+  }
+
+  //====TITLE OF MODAL==============================
+  & .title{
+    font-size: 1.3em;
+    padding-bottom: 10px;
+  }
+
+  //====LINK TO POLL================================
+  & .link{
+    background: $charcoal;
+    color: #FFF;
+    font-size: 1.2em;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    width: calc(100% -  20px);
+
+    &::selection{
+      background-color: hsl(hue($reallydarkred), 70, 70);
+    }
+  }
+
+  & .buttonwrapper{
+    margin-right: 15px;
+  }
+
+  & + *{
+    transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+    transform : translate3d(0, 0, 0);
+  }
+}
+
+//====FOR WHEN MODAL IS VISIBLE==========================
+.visiblemodal{
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0px) rotate3d(1, 0, 0, 0deg);
+  visibility: visible;
+  transition: transform 0.2s ease-in;
+
+  & + *{
+    opacity: 0.7;
+    transform : translate3d(0, 0, -50px);
+    z-index: 1;
+  }
+}

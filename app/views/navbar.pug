@@ -14,9 +14,10 @@ nav.nav
     li.navbut.hamburger(id="hamburger-menu")
       div.bar
     if logged
-      a.navbut.login.facebook(href="/auth/facebook") Facebook
-      a.navbut.login.google(href="/auth/google") Google
-      a.navbut.login.github(href="/auth/github") Github
+      div.navbut.login(id="authlogin") Login
+      //- a.navbut.login.facebook(href="/auth/facebook") Facebook
+      //- a.navbut.login.google(href="/auth/google") Google
+      //- a.navbut.login.github(href="/auth/github") Github
     else
       - 
         checkpage = function(p){
