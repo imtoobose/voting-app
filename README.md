@@ -16,17 +16,16 @@ Structure:
 
 * **app/**
   * **config/**
-      * **stategies** : passport login strategies
-    * **mongo/**
-      * **polls** : Polls schema
-        * **user**  : User schema
-    * **routes/**
-      * **addpolls**: POST, GET requests for adding, modifying, voting, deleting polls
-      * **auth**    : authorize user login with passport, or logout
-      * **home**    : render pages 
+    * **stategies** : passport login strategies
+  * **mongo/**
+    * **polls** : Polls schema
+    * **user**  : User schema
+  * **routes/**
+    * **addpolls**: POST, GET requests for adding, modifying, voting, deleting polls
+    * **auth**    : authorize user login with passport, or logout
+    * **home**    : render pages 
   * **static/**
-      * **dev/**  : babel, pug, scss files for static pages
-        * **dist/** : compiled files from ../dev
-    * **views:** .pug files for views
-        
+    * **dev/**  : babel, pug, scss files for static pages
+    * **dist/** : compiled files from ../dev
+  * **views/** : .pug files for views
 * **server** : server logic
